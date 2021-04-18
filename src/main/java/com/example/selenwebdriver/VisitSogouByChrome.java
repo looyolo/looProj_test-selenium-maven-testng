@@ -32,11 +32,8 @@ public class VisitSogouByChrome {
         baseUrl = "http://www.sogou.com";
     }
 
-    @Test
-    public void VisitSogou() { /* 打开搜狗首页 */ driver.get(baseUrl + "/"); }
-
     @AfterMethod
-    public void teardown() throws Exception {
+    public void tearDown() throws Exception {
         try {
             // Nothiing to do
         } finally {
@@ -44,4 +41,8 @@ public class VisitSogouByChrome {
             driver.quit();
         }
     }
+
+    @Test
+    public void visitSogou() { /* 打开搜狗首页 */ driver.get(baseUrl + "/"); }
+
 }

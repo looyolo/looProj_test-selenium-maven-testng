@@ -36,11 +36,8 @@ public class VisitSogouByFirefox {
         baseUrl = "http://www.sogou.com";
     }
 
-    @Test
-    public void VisitSogou() { /* 打开搜狗首页 */ driver.get(baseUrl + "/"); }
-
     @AfterMethod
-    public void teardown() {
+    public void tearDown() {
         try {
             // Nothing to do
         } finally {
@@ -48,5 +45,8 @@ public class VisitSogouByFirefox {
             driver.quit();
         }
     }
+
+    @Test
+    public void visitSogou() { /* 打开搜狗首页 */ driver.get(baseUrl + "/"); }
 
 }
