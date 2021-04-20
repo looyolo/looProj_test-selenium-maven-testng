@@ -1,9 +1,13 @@
 package com.example.selenwebdriver;
 
+import com.beust.jcommander.Parameter;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.epam.jdi.light.elements.common.Mouse;
+import com.sun.javafx.logging.JFRInputEvent;
 import io.qameta.allure.selenide.AllureSelenide;
 import javafx.scene.input.MouseButton;
+
+import org.apache.xpath.operations.Div;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -20,6 +25,10 @@ import org.testng.annotations.Test;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 代码解释：
@@ -224,6 +233,149 @@ public class WebDriverApiExamples {
 //
 //        Thread.sleep(2000);
 //    }
+
+//    /* 7: 操作下拉列表
+//    *         selenium 中有一个 Select 类，用来操作 select 下拉列表
+//    * */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void operateDropList(String baseUrl1) throws InterruptedException {
+//        driver.get(baseUrl1 + "/");
+//        Thread.sleep(2000);
+//
+//        // 鼠标移动到"搜狗搜索"主页右上角，悬停在"天气"位置，不做任何点击操作
+//        WebElement aboutWeather = driver.findElement(By.xpath("//*[@id=\"cur-weather\"]"));
+//        Actions action = new Actions(driver);
+//        action.moveToElement(aboutWeather);
+//        // 这一步，必不可少，作用是使得以上组合键生效
+//        action.build().perform();
+//
+//        /*
+//        *  这里是一个非 select 下拉列表，
+//        *   操作情形与网页元素操作一样：定位元素，设置等待，点击元素等等
+//        * */
+//        //  鼠标点击"更换城市"，可以看到"省份"下拉列表
+//        WebElement changeCity = driver.findElement(By.xpath("//*[@id=\"weather-city-btn\"]"));
+//        changeCity.click();
+//
+//        /*
+//        *  重点：
+//        *     Select 类 操作 select 下拉列表，实现 单选
+//        * */
+//        WebElement aboutProvince = driver.findElement(By.xpath("//*[@id=\"weather-province\"]"));
+//        Select dropListAboutProvince = new Select(aboutProvince);
+//        // 断言是否多选，isMultiple 判断这个下拉列表是否允许多选。标签 Select 包含属性 multiple=true 时，表示允许多选，否则不允许
+//        Assert.assertFalse(dropListAboutProvince.isMultiple());
+//        // 断言当前被选中的选项中文本内容是否为"广东"， getFirstSelectedOption().getText() 返回当前被选中的选项中文本内容
+//        Assert.assertTrue(dropListAboutProvince.getFirstSelectedOption().getText().equals("广东"));
+//        // 断言当前被选中的选项中文本内容是否为"广东"， selectByIndex 表示通过走索引选中，索引 0 表示第一选项，以此类推
+//        dropListAboutProvince.selectByIndex(8);
+//        Assert.assertEquals(dropListAboutProvince.getFirstSelectedOption().getText(),"广东");
+//        // 断言当前被选中的选项中文本内容是否为"广东"，selectByValue 表示通过属性 value 值匹配选中
+//        dropListAboutProvince.selectByValue("广东");
+//        Assert.assertEquals(dropListAboutProvince.getFirstSelectedOption().getText(),"广东");
+//        // 断言当前被选中的选项中文本内容是否为"广东"， selectByVisibleText 表示通过选项中文本匹配选中
+//        dropListAboutProvince.selectByVisibleText("广东");
+//        Assert.assertEquals(dropListAboutProvince.getFirstSelectedOption().getText(),"广东");
+//
+//        /*
+//         * 经典场景用例：
+//         *   检查 单选列表的选项文字是否符合期望的设计意图
+//         *   定义 2 个 List 对象，通过泛型 <String> 限定为 String 类型，
+//         *    分别存储 页面上实际选项 expected_options 、设计意图中期望选项 expected_options ，
+//         *     遍历逐一断言比对
+//         */
+//        // 设计意图中期望出现的全部选项的文案，存到 List<String> 对象 expected_options 中
+//        String[] expected_info = {"本地天气", "北京", "上海", "天津", "重庆", "安徽", "福建", "甘肃", "广东", "广西",
+//                "贵州", "海南", "河北", "河南", "黑龙江", "湖北", "湖南", "吉林", "江苏", "江西", "辽宁", "内蒙古",
+//                "宁夏", "青海", "山东", "山西", "陕西", "四川", "西藏", "新疆", "云南", "浙江", "香港", "澳门", "台湾"};
+//        List<String> expected_options = Arrays.asList(expected_info);
+//        // 实际功能设计完成后页面上实际选项的文案，存到 List<String> 对象 actual_options 中
+//        List<String> actual_options = new ArrayList<String>();
+//        for (WebElement option : dropListAboutProvince.getOptions()) actual_options.add(option.getText());
+//        // 遍历逐一断言比对
+//        for (int i = 0; i < expected_options.size(); i++) {
+//            Assert.assertEquals(actual_options.get(i), expected_options.get(i));
+//            int j = i + 1 ;
+//            System.out.println("断言比对次数：" + j);
+//        }
+//
+//        /*
+//         *  备忘：
+//         *     Select 类 操作 select 下拉列表，实现 多选
+//         *         操作情形与实现单选时一样：定位到下拉列表元素，生成 Select 对象，判断是否允许多选，多处单选等等
+//         *             有一点区别在于，多选时，deselectBy... 用于取消选项的选中状态
+//         *         多选的应用情形并不多见，这里暂时找不到合适的网站来演示
+//         *         多选，多见于"选择框（打勾，或变高亮）"的使用
+//         * */
+//    }
+
+//    /* 7.1: 操作单选框
+//     *         单选框 对应到标签 input 属性 type="ratio"
+//     * */
+//    @Parameters("baseUrl4")
+//    @Test
+//    public void operateRatio(String baseUrl4) throws InterruptedException {
+//        driver.get(baseUrl4 + "/");
+//
+//        // 查找（是 findElements 不是 findElement ）属性 type="ratio" 与 name="second" 的所有 input 标签，存入 List<WebElement> 容器中
+//        List<WebElement> ratio_options = driver.findElements(By.xpath("//child::input[@type=\"radio\" and @name=\"second\"]"));
+//        System.out.println("ratio_options 个数为 " + ratio_options.size());
+//
+//        // for 循环 遍历 List<WebElement> 容器中所有选框
+//        for (WebElement ratio_option : ratio_options) {
+//            // 查找 属性 id="sencond_appoint" 的单选框，若未被选中，则调用 click 单击选中它，并断言是否选中，选中则直接退出整个循环
+//            if (ratio_option.getAttribute("id").equals("sencond_appoint")) {
+//                if (!ratio_option.isSelected()) {
+//                    ratio_option.click();
+//                    Assert.assertTrue(ratio_option.isSelected());
+//
+//                    break;
+//                }
+//            }
+//        }
+//        Thread.sleep(2000);
+//    }
+//
+//    /* 7.2: 操作复选框
+//     *         复选框 对应到标签 input 属性 type="checkbox"
+//     * */
+//    @Parameters("baseUrl4")
+//    @Test
+//    public void operateCheckBox(String baseUrl) throws InterruptedException {
+//        driver.get(baseUrl + "/");
+//
+//        // 查找（是 findElements 不是 findElement ）属性 type="checkbox" 的所有 input 标签，存入 List<WebElement> 容器中
+//        List<WebElement> checkbox_options = driver.findElements(By.xpath("//child::div[@class=\"imp secondList\"]/input[@type=\"checkbox\"]"));
+//        System.out.println("checkbox_options 个数是 " + checkbox_options.size());
+//
+//        // for 循环 遍历 List<WebElement> 容器中所有选框
+//        for (WebElement checkbox_option : checkbox_options) {
+//            // 正则陪匹配出属性 value 值在 65 以下个位数为 5 的两位数选项
+//            if (checkbox_option.getAttribute("value").matches("[0-6]?5")) {
+//                // 若复选框未被选中，则调用 click 单击选中它，并断言是否选中
+//                if (!checkbox_option.isSelected()) {
+//                    checkbox_option.click();
+//                    Assert.assertTrue(checkbox_option.isSelected());
+//                }
+//            }
+//        }
+//        Thread.sleep(2000);
+//
+//        // for 循环 遍历 List<WebElement> 容器中所有选框
+//        for (WebElement checkbox_option : checkbox_options) {
+//            // 正则陪匹配出属性 value 值在 65 以下个位数为 5 的两位数选项
+//            if (checkbox_option.getAttribute("value").matches("[0-6]?5")) {
+//                // 若复选框已经被选中，则调用 click 单击取消选中它，并断言是否取消选中
+//                if (checkbox_option.isSelected()) {
+//                    checkbox_option.click();
+//                    Assert.assertTrue(!checkbox_option.isSelected());
+//                }
+//            }
+//        }
+//        Thread.sleep(2000);
+//    }
+
 
 
 }
