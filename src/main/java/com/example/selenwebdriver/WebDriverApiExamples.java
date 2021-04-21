@@ -3,6 +3,7 @@ package com.example.selenwebdriver;
 import com.beust.jcommander.Parameter;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.epam.jdi.light.elements.common.Mouse;
+import com.sun.java.swing.plaf.windows.WindowsGraphicsUtils;
 import com.sun.javafx.logging.JFRInputEvent;
 import io.qameta.allure.selenide.AllureSelenide;
 import javafx.scene.input.MouseButton;
@@ -14,8 +15,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Encodable;
 import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.support.ui.Select;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -25,6 +29,7 @@ import org.testng.annotations.Test;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -375,6 +380,33 @@ public class WebDriverApiExamples {
 //        }
 //        Thread.sleep(2000);
 //    }
+
+//    /* 8：杀掉 Windowss 浏览器 进程
+//    *         需要从 https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver
+//    *         添加 maven 依赖导入 WindowsUtils 类，亲测这个类还有存在于 Version 3.14.0
+//    *         不过，已经标记为过时，不赞成使用。Aug, 2018 之后就没有这个类了。
+//    *         但是，查看源码，了解逻辑后，是可以通过 CommandLine 类来实现同样的目的和作用的。
+//    * */
+//    @Parameters("processName")
+//    @Test
+//    public void killBrowserProcess(String processName) throws InterruptedException {
+//        // 判断当前系统平台是否为 WINDOWS ，也可以是 UNIX、LINUX、IOS 等等
+//        if (Platform.getCurrent().is(Platform.WINDOWS)) {
+//            System.out.println("当前系统平台：" + Platform.WINDOWS);
+//            // 杀掉 Windows 进程中的 IE 浏览器集成，关闭所有 IE 浏览器
+//            CommandLine command = new CommandLine("taskkill", "/f", "/t", "/pid", processName);
+//            // 指定 命令行执行结果打印 输出到 IDEA output console，必须在调用 execute 之前进行指定
+//            command.copyOutputTo(System.out);
+//            // 执行命令
+//            command.execute();
+//        }
+//    }
+
+    /* 9:
+    *
+    *
+    *  */
+
 
 
 

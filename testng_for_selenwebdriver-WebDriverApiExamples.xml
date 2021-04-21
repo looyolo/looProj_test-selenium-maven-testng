@@ -26,6 +26,7 @@
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://search.jd.com/Search?keyword=%E6%B0%B4%E6%9E%9C&amp;enc=utf-8&amp;wq=&amp;pvid=04e3cb11046d416dbb4d9c2423073d1a"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
+        <parameter name="processName" value="iexplore.exe"/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
             <class name="com.example.selenwebdriver.WebDriverApiExamples"/>
