@@ -10,16 +10,16 @@
         <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\geckodriver.exe"/>
         <parameter name="baseUrl1" value="http://www.sogou.com"/>
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
-        <parameter name="baseUrl3" value="https://search.jd.com/Search?keyword=%E6%B0%B4%E6%9E%9C&amp;enc=utf-8&amp;wq=&amp;pvid=04e3cb11046d416dbb4d9c2423073d1a"/>
+        <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
-        <parameter name="baseUrl5" value="http://demo.qunee.com/#Hello%20Qunee"/>
-        <parameter name="demoUrl1" value="file:///D:/honor_IDEA_myProject/looProj_test-selenium-maven-testng/src/main/java/com/example/webdemo/demo_for_dragPageElement.html"/>
+        <parameter name="baseUrl5" value=""/>
+        <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="processName" value="iexplore.exe"/>
         <classes>
             &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
             <class name="com.example.selenwebdriver.WebDriverApiExamples"/>
         </classes>
-    </test>-->
+    </test> -->
     <test name="ChromeTest">
         <!-- 添加参数值对，可以是多个 -->
         <parameter name="browser" value="chrome"/>
@@ -27,9 +27,9 @@
         <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\chromedriver.exe"/>
         <parameter name="baseUrl1" value="http://www.sogou.com"/>
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
-        <parameter name="baseUrl3" value="https://search.jd.com/Search?keyword=%E6%B0%B4%E6%9E%9C&amp;enc=utf-8&amp;wq=&amp;pvid=04e3cb11046d416dbb4d9c2423073d1a"/>
+        <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
-        <parameter name="baseUrl5" value="http://www.4399.com/flash/217350_3.htm"/>
+        <parameter name="baseUrl5" value=""/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="processName" value="iexplore.exe"/>
         <classes>
