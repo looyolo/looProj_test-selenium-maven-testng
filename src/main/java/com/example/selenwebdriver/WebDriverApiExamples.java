@@ -588,6 +588,55 @@ public class WebDriverApiExamples {
 //        }
 //    }
 
+//    /* 12：识别并操作新弹出的浏览器窗口
+//    *         适用场景：打开 2 个及以上的浏览器窗口时
+//    *  */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void identifyPopUpWindow(String baseUrl1) {
+//        driver.get(baseUrl1 + "/");
+//        // 先将当前浏览器窗口的 句柄 和 页面标题 存储到 retainedHandle 、 retainedTitle 变量中
+//        String retainedHandle = driver.getWindowHandle();
+//        String retainedTitle = driver.getTitle();
+//        System.out.println("保留的句柄：" + driver.getWindowHandle() + " , \n保留的页面标题：" + driver.getTitle() );
+//
+//        // 找到页面上其他的任意一个唯一的链接元素 存储到 sogouLink 变量中。注意，该链接 必须是可以 打开一个新的浏览器窗口
+//        WebElement sogouLink = driver.findElement(By.xpath("//*[@id=\"QRcode-footer\"]//a[@uigs-id=\"mid_pinyin\"]"));
+//        //  这个 xpath 表达式 定位到的链接元素不唯一，也无法打开一个新的浏览器窗口，可以对比一下差异
+////        WebElement sogouLink = driver.findElement(By.xpath("//a"));
+//        // 点击找到的链接元素
+//        sogouLink.click();
+//
+//        // 获取当前浏览器所有打开窗口的句柄 存储到 pendingHandles 容器中。
+//        Set<String> pendingHandles = driver.getWindowHandles();
+//        // 若 allPendingHandles 容器部不为空，再遍历其中所有浏览器窗口的句柄，目的是 识别到期望的浏览器窗口
+//        if (!(pendingHandles == null)) {
+//            for (String pendingHandle : pendingHandles) {
+//                try {
+//                    /*
+//                    * 方法 1 ：获取每个句柄对应的浏览器窗口的 Tittle 属性值，判断 是否为 "搜狗输入法 - 首页"
+//                    * 方法 2 ：获取每个句柄对应的浏览器窗口的 源代码 是否包含 "搜狗输入法 - 首页"
+//                    *  */
+//                    if (driver.switchTo().window(pendingHandle).getTitle().equals("搜狗输入法 - 首页") ||
+//                            driver.switchTo().window(pendingHandle).getPageSource().contains("搜狗输入法 - 首页")) {
+//                        // 操作识别到的浏览器窗口
+//                        driver.findElement(By.xpath("//*[@id=\"searchTip\"]")).sendKeys("拼音");
+//                        Thread.sleep(2000);
+//                    }
+//                } catch (NoSuchWindowException | InterruptedException e) {
+//                    // 若识别不到期望的浏览器窗口的句柄，则会抛出 NoSuchWindowException
+//                    e.printStackTrace();
+//                }
+//            }
+//            System.out.println("新弹出窗口的句柄：" + driver.getWindowHandle() + " , \n新弹出窗口的页面标题：" + driver.getTitle());
+//        }
+//        // 切换返回到 最开始打开的浏览器窗口的句柄
+//        driver.switchTo().window(retainedHandle);
+//        System.out.println("切换返回到的句柄：" + driver.getWindowHandle() + " , \n切换返回到的页面标题：" + driver.getTitle());
+//        // 断言 切换返回到的浏览器窗口的页面标题（Title 属性值）和 最开始打开的 是否保持一致
+//        Assert.assertEquals(driver.getTitle(), retainedTitle);
+//    }
+
 
 
 
