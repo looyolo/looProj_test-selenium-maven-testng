@@ -54,7 +54,6 @@ import java.util.logging.SimpleFormatter;
  */
 public class WebDriverApiExamples {
     WebDriver driver;
-    String baseUrl1, baseUrl2;
 
     // SelenideLogger 添加监听器 监听 AllureSelenide 日志
     @BeforeClass
