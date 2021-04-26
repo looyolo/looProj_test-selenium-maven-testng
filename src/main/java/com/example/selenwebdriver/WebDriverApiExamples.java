@@ -55,9 +55,11 @@ import java.util.logging.SimpleFormatter;
 public class WebDriverApiExamples {
     WebDriver driver;
 
-    // SelenideLogger 添加监听器 监听 AllureSelenide 日志
     @BeforeClass
-    public static void setUpAllure() { SelenideLogger.addListener("allure", new AllureSelenide()); }
+    public static void setUpAllure() {
+        // SelenideLogger 添加监听器 监听 AllureSelenide 日志
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @Parameters({"browser", "whichDriver", "whereDriver"})
     @BeforeClass
@@ -575,7 +577,7 @@ public class WebDriverApiExamples {
                     return webDriver.findElement(By.xpath("//*[@id=\"hotelSwitch\"]/a[contains(text(), \"国内\")]")).getText().equals("国内酒店");
                 }
             });
-            // 断崖 返回的 Boolean 结果是否为真
+            // 断言 返回的 Boolean 结果是否为真
             Assert.assertTrue(isContained);
 
             // 判断 页面 加载 Ajax请求 是否满足条件要求，是的话，则返回一个 Boolean 结果，并继续执行下一行代码
