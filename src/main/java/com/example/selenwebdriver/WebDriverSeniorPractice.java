@@ -69,92 +69,92 @@ public class WebDriverSeniorPractice {
         }
     }
 
-//    /* 1：使用 JavascriptExecutor 进行页面元素的单击操作
-//    *         在某些情况下，页面元素的 click 操作无法生效，可以用这个方法来解决
-//    *
-//    *         把常用的操作写在一个函数方法里，减少冗余代码的编写，方便重复调用，这就是"封装"的作用
-//    *  */
-//    @Parameters("baseUrl1")
-//    @Test
-//    public void testJavascriptExecuteClick(String baseUrl1) throws InterruptedException {
-//        driver.get(baseUrl1 + "/");
-//
-//        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
-//        WebElement searchButton = driver.findElement(By.xpath("//*[@id=\"stb\"]"));
-//        searchInputBox.sendKeys("使用 JavascriptExecutor 进行页面元素的单击操作");
-//        // 调用 封装好的 javascriptExecuteClick 执行单击"搜狗搜索"按钮
-//        javascriptExecuteClick(searchButton);
-//    }
-//    // 封装好的 javascriptExecuteClick
-//    protected void javascriptExecuteClick(WebElement webElement) {
-//        try {
-//            // 判断 函数入参 webElement 是否显示在页面中，以及 是否处于使能状态
-//            if (webElement.isDisplayed() && webElement.isEnabled()) {
-//                System.out.println("使用 JavascriptExecutor 进行页面元素的单击操作");
-//                ((JavascriptExecutor)driver).executeScript("arguments[0].click()",webElement);
-//            }
-//        } catch (StaleElementReferenceException e) {
-//            System.out.println("页面元素引用异常：");
-//            e.printStackTrace();
-//        } catch (NoSuchElementException e) {
-//            System.out.println("页面元素不存在：");
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            System.out.println("单击操作无法完成：");
-//            e.printStackTrace();
-//        }
-//    }
+    /* 1：使用 JavascriptExecutor 进行页面元素的单击操作
+    *         在某些情况下，页面元素的 click 操作无法生效，可以用这个方法来解决
+    *
+    *         把常用的操作写在一个函数方法里，减少冗余代码的编写，方便重复调用，这就是"封装"的作用
+    *  */
+    @Parameters("baseUrl1")
+    @Test
+    public void testJavascriptExecuteClick(String baseUrl1) throws InterruptedException {
+        driver.get(baseUrl1 + "/");
 
-//    /* 2：在使用 Ajax 方式产生的浮动框中，单击选择包含某个关键字的选项
-//    *
-//    *
-//    *  */
-//    @Parameters("baseUrl1")
-//    @Test
-//    public void testAjaxSuggestionOption(String baseUrl1) throws InterruptedException {
-//        driver.get(baseUrl1 + "/");
-//
-//        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
-//        WebElement searchButton = driver.findElement(By.xpath("//*[@id=\"stb\"]"));
-//        String keywordsPart1 = "";
-//        String keywordsPart2 = "争议";
-//        searchInputBox.sendKeys(keywordsPart1);
-//        searchInputBox.click();
-//        // 延长页面停顿时间，保证 浮动框内 的选项内容 可以被获取得到
-//        Thread.sleep(2000);
-//        List<WebElement> suggestionOptions = null;
-//
-//        try {
-//            // 判断页面元素是否存在，这里使用 定制化显示等待
-//            WebDriverWait webDriverWait = new WebDriverWait(driver,2);
-//            // 将浮动框中的"今日热词"选项，存放到一个 List 容器中
-//            suggestionOptions = webDriverWait.until((new ExpectedCondition<List<WebElement>>() {
-//                @Override
-//                public @Nullable List<WebElement> apply(@Nullable WebDriver webDriver) {
-//                    //  调用 driver.findElements 返回一个 List<WebElement> 集合
-//                    return webDriver.findElements(By.xpath("//*[@id=\"vl\"]//ul/li"));
-//                }
-//            }));
-//        } catch (Exception e) {
-//            Assert.fail("FAILED, please check your location expression....");
-//            e.printStackTrace();
-//        }
-//
-//        // 容器不为空的话，遍历所有"今日热词"选项，判断 哪一个包含 keywordsPart2 ，则单击后会自动显示在输入框中，进而点击"搜索"按钮
-//        if (!suggestionOptions.isEmpty()) {
-//            System.out.println("\"今日热词\"选项个数：" + suggestionOptions.size());
-//            for (WebElement suggestionOption : suggestionOptions) {
-//                if (suggestionOption.getText().contains(keywordsPart2)) {
-//                    System.out.println("选中的\"今日热词\"选项：" + suggestionOption.getText());
-//                    suggestionOption.click();
-//                    searchButton.click();
-//                    break;
-//                }
-//            }
-//        }
-//        Thread.sleep(2000);
-//    }
-    
+        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
+        WebElement searchButton = driver.findElement(By.xpath("//*[@id=\"stb\"]"));
+        searchInputBox.sendKeys("使用 JavascriptExecutor 进行页面元素的单击操作");
+        // 调用 封装好的 javascriptExecuteClick 执行单击"搜狗搜索"按钮
+        javascriptExecuteClick(searchButton);
+    }
+    // 封装好的 javascriptExecuteClick
+    protected void javascriptExecuteClick(WebElement webElement) {
+        try {
+            // 判断 函数入参 webElement 是否显示在页面中，以及 是否处于使能状态
+            if (webElement.isDisplayed() && webElement.isEnabled()) {
+                System.out.println("使用 JavascriptExecutor 进行页面元素的单击操作");
+                ((JavascriptExecutor)driver).executeScript("arguments[0].click()",webElement);
+            }
+        } catch (StaleElementReferenceException e) {
+            System.out.println("页面元素引用异常：");
+            e.printStackTrace();
+        } catch (NoSuchElementException e) {
+            System.out.println("页面元素不存在：");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("单击操作无法完成：");
+            e.printStackTrace();
+        }
+    }
+
+    /* 2：在使用 Ajax 方式产生的浮动框中，单击选择包含某个关键字的选项
+    *
+    *
+    *  */
+    @Parameters("baseUrl1")
+    @Test
+    public void testAjaxSuggestionOption(String baseUrl1) throws InterruptedException {
+        driver.get(baseUrl1 + "/");
+
+        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
+        WebElement searchButton = driver.findElement(By.xpath("//*[@id=\"stb\"]"));
+        String keywordsPart1 = "";
+        String keywordsPart2 = "争议";
+        searchInputBox.sendKeys(keywordsPart1);
+        searchInputBox.click();
+        // 延长页面停顿时间，保证 浮动框内 的选项内容 可以被获取得到
+        Thread.sleep(2000);
+        List<WebElement> suggestionOptions = null;
+
+        try {
+            // 判断页面元素是否存在，这里使用 定制化显示等待
+            WebDriverWait webDriverWait = new WebDriverWait(driver,2);
+            // 将浮动框中的"今日热词"选项，存放到一个 List 容器中
+            suggestionOptions = webDriverWait.until((new ExpectedCondition<List<WebElement>>() {
+                @Override
+                public @Nullable List<WebElement> apply(@Nullable WebDriver webDriver) {
+                    //  调用 driver.findElements 返回一个 List<WebElement> 集合
+                    return webDriver.findElements(By.xpath("//*[@id=\"vl\"]//ul/li"));
+                }
+            }));
+        } catch (Exception e) {
+            Assert.fail("FAILED, please check your location expression....");
+            e.printStackTrace();
+        }
+
+        // 容器不为空的话，遍历所有"今日热词"选项，判断 哪一个包含 keywordsPart2 ，则单击后会自动显示在输入框中，进而点击"搜索"按钮
+        if (!suggestionOptions.isEmpty()) {
+            System.out.println("\"今日热词\"选项个数：" + suggestionOptions.size());
+            for (WebElement suggestionOption : suggestionOptions) {
+                if (suggestionOption.getText().contains(keywordsPart2)) {
+                    System.out.println("选中的\"今日热词\"选项：" + suggestionOption.getText());
+                    suggestionOption.click();
+                    searchButton.click();
+                    break;
+                }
+            }
+        }
+        Thread.sleep(2000);
+    }
+
 
 
 
