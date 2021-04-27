@@ -17,9 +17,11 @@
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
-        <parameter name="targetFile1" value="几种进制的转换工具"/>
+        <parameter name="downloadFile1" value="几种进制的转换工具"/>
+        <parameter name="fileName1" value="jzzh.rar"/>
         <parameter name="downloadUrl2" value=""/>
-        <parameter name="targetFile2" value=""/>
+        <parameter name="downloadFile2" value=""/>
+        <parameter name="fileName2" value=""/>
         <classes>
             &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
@@ -39,9 +41,11 @@
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
-        <parameter name="targetFile1" value="几种进制的转换工具"/>
+        <parameter name="downloadFile1" value="几种进制的转换工具"/>
+        <parameter name="fileName1" value="jzzh.rar"/>
         <parameter name="downloadUrl2" value=""/>
-        <parameter name="targetFile2" value=""/>
+        <parameter name="downloadFile2" value=""/>
+        <parameter name="fileName2" value=""/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
