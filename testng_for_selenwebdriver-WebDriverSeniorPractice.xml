@@ -12,11 +12,17 @@
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
+        <parameter name="baseUrl5" value=""/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="processName" value="iexplore.exe"/>
+        <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
+        <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
+        <parameter name="targetFile1" value="几种进制的转换工具"/>
+        <parameter name="downloadUrl2" value=""/>
+        <parameter name="targetFile2" value=""/>
         <classes>
             &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
-            <class name="com.example.selenwebdriver.WebDriverApiExamples"/>
+            <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
         </classes>
     </test>-->
     <test name="ChromeTest">
@@ -28,8 +34,14 @@
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
+        <parameter name="baseUrl5" value=""/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="processName" value="iexplore.exe"/>
+        <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
+        <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
+        <parameter name="targetFile1" value="几种进制的转换工具"/>
+        <parameter name="downloadUrl2" value=""/>
+        <parameter name="targetFile2" value=""/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
