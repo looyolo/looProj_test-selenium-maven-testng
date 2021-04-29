@@ -17,11 +17,11 @@
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
-        <parameter name="downloadFile1" value="几种进制的转换工具"/>
-        <parameter name="fileName1" value="jzzh.rar"/>
+        <parameter name="downloadFileVisibleName1" value="几种进制的转换工具"/>
+        <parameter name="downloadFileName1" value="jzzh.rar"/>
         <parameter name="downloadUrl2" value=""/>
-        <parameter name="downloadFile2" value=""/>
-        <parameter name="fileName2" value=""/>
+        <parameter name="downloadFileVisibleName2" value=""/>
+        <parameter name="downloadFileName2" value=""/>
         <classes>
             &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
@@ -36,16 +36,18 @@
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
-        <parameter name="baseUrl5" value=""/>
+        <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="processName" value="iexplore.exe"/>
-        <parameter name="downloadDirectory" value="C:\download_by_selenwebdriver"/>
+        <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
-        <parameter name="downloadFile1" value="几种进制的转换工具"/>
-        <parameter name="fileName1" value="jzzh.rar"/>
+        <parameter name="downloadFileVisibleName1" value="几种进制的转换工具"/>
+        <parameter name="downloadFileName1" value="jzzh.rar"/>
         <parameter name="downloadUrl2" value=""/>
-        <parameter name="downloadFile2" value=""/>
-        <parameter name="fileName2" value=""/>
+        <parameter name="downloadFileVisibleName2" value=""/>
+        <parameter name="downloadFileName2" value=""/>
+        <parameter name="uploadDirectory" value="C:\selenwebdriver_test_upload"/>
+        <parameter name="uploadFileName1" value="论文1.doc"/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>

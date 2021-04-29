@@ -5,6 +5,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.logger.AllureLogger;
 
 import io.qameta.allure.selenide.AllureSelenide;
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.By;
@@ -17,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -204,35 +209,35 @@ public class WebDriverSeniorPractice {
 //        }
 //        Thread.sleep(2000);
 //    }
-
-//    /* 4：无人看管，自动下载文件，并判断是否下载成功
+//
+//    /* 4：无人化自动下载文件，并判断是否下载成功
 //     *         自动化实施过程中，经常会遇到在代码中设定了下载文件的 MIME 类型，但是测试程序执行时，依旧会显示下载弹出框，并且需要人为介入处理，
 //     *          产生上述情况的原因是，网站服务器中的一些文件定义为其他 MIME 类型，例如，一个 exe 文件被网站服务器定义为 "application/octet-stream"，
 //     *         如何获取下载文件的 MIME 类型呢？可以借助抓包工具 Charles 等，从 HTTP Request Header 中查看 Content-type 获悉。
 //     *
 //     *  */
-//    @Parameters({"browser", "downloadUrl1", "downloadFile1", "downloadDirectory", "fileName1"})
+//    @Parameters({"browser", "downloadUrl1", "downloadFileVisibleName1", "downloadDirectory", "downloadFileName1"})
 //    @Test
-//    public void downloadAutomatically(String browser, String downloadUrl1, String downloadFile1,
-//                                      String downloadDirectory, String fileName1) throws InterruptedException {
+//    public void downloadAutomatically(String browser, String downloadUrl1, String downloadFileVisibleName1,
+//                                      String downloadDirectory, String downloadFileName1) throws InterruptedException {
 //        WebDriver driver_for_download = null;
 //        try {
 //            // 判断选择 chrome 浏览器下载目标文件
 //            if (browser.equalsIgnoreCase("chrome")) {
 //                driver_for_download = new ChromeDriver(setChromeDriverOptions(downloadDirectory));
 //                driver_for_download.get(downloadUrl1);
-//                driver_for_download.findElement(By.partialLinkText(downloadFile1)).click();
+//                driver_for_download.findElement(By.partialLinkText(downloadFileVisibleName1)).click();
 //            }
 //            // 判断选择 firefox 浏览器下载目标文件
 //            if (browser.equalsIgnoreCase("firefox")) {
 //                driver_for_download = new FirefoxDriver(setFirefoxDriverOptions(downloadDirectory));
 //                driver_for_download.get(downloadUrl1);
-//                driver_for_download.findElement(By.partialLinkText(downloadFile1)).click();
+//                driver_for_download.findElement(By.partialLinkText(downloadFileVisibleName1)).click();
 //            }
 //            // 延迟页面停顿时间，等待下载完成
 //            Thread.sleep(2000);
 //            // 断言 是否下载成功
-//            Assert.assertTrue(isDownloadedSuccessfully(downloadDirectory, fileName1));
+//            Assert.assertTrue(isDownloadedSuccessfully(downloadDirectory, downloadFileName1));
 //            System.out.println("下载成功！");
 //        } catch (Exception e) {
 //            e.printStackTrace();
@@ -241,14 +246,14 @@ public class WebDriverSeniorPractice {
 //        }
 //    }
 //    // 封装好的 "是否下载成功" 判断方法
-//    protected Boolean isDownloadedSuccessfully(String downloadDirectory, String fileName) {
+//    protected Boolean isDownloadedSuccessfully(String downloadDirectory, String downloadFileName) {
 //        Boolean flag = false;
 //        File[] files = new File(downloadDirectory).listFiles();
 //        if (files == null && files.length == 0) {
 //            flag = false;
 //        }
 //        for (File file : files) {
-//            if (file.getName().contains(fileName)) {
+//            if (file.getName().contains(downloadFileName)) {
 //                flag = true;
 //                break;
 //            }
@@ -308,39 +313,122 @@ public class WebDriverSeniorPractice {
 //
 //        return chromeOptions;
 //    }
-
-
-    /* 5：
-     *
-     *
-     *
-     *  */
-
-
-
-
-
-
-
-
-
-    /* X：在日期时间控件上进行选择
-     *
-     *  */
-//    @Parameters("baseUrl3")
+//
+//
+//    /* 5：无人化自动上传文件
+//     *         文件上传操作需要等待，经常使用"显式等待"的判断代码。
+//     *          这里使用常规的显式等待，不需要增加 try/catch 捕捉异常
+//     *         另外，借助第三方工具 AutoIt 也可以实现，
+//     *          访问 [YOLO： Selenium WebDriver 3.x 借助第三方工具 AutoIt 处理文件上传下载]
+//     *           (https://blog.csdn.net/qq_15736701/article/details/116230283)
+//     *  */
+//    @Parameters({"baseUrl5", "uploadDirectory", "uploadFileName1"})
 //    @Test
-//    public void operateDatetimeWidget(String baseUrl3) throws InterruptedException {
-//        driver.get(baseUrl3 + "/");
+//    public void uploadAutomatically(String baseUrl5, String uploadDirectory, String uploadFileName1) throws InterruptedException {
+//        driver.get(baseUrl5);
 //
-//        WebElement checkinTimeInputBox = driver.findElement(By.xpath("//*[@id=\"HD_CheckIn\"]"));
-//        WebElement checkoutTimeInputBox = driver.findElement(By.xpath("//*[@id=\"HD_CheckOut\"]"));
-//        checkinTimeInputBox.sendKeys("2021-04-31");
-//        checkoutTimeInputBox.sendKeys("2021-05-31");
-//
-//        driver.findElement(By.xpath("//*[@id=\"HD_CityName\"]")).sendKeys("广州");
-//        driver.findElement(By.xpath("//*[@id=\"HD_Btn\"]")).click();
-//
-//        Thread.sleep(15000);
+//        // 定义一个等待对象
+//        WebDriverWait webDriverWait = new WebDriverWait(driver, 3);
+//        // 定位到 上传文件输入框，注意：网站上这里 input 标签的 "父一楼 div " id 是随机生成的，每次都不一样，需要再上到 "父二楼 div" id 定位才可以唯一
+//        WebElement uploadFileInputBox = driver.findElement(By.xpath("//*[@id=\"btns2\"]//input"));
+//        // 上传文件输入框 输入 要上传的文件存放路径 和 上传文件名
+//        System.out.println("上传文件：" + StringUtils.join(new String[]{uploadDirectory, uploadFileName1}, "\\"));
+//        uploadFileInputBox.sendKeys(StringUtils.join(new String[] {uploadDirectory, uploadFileName1}, "\\"));
+//        // 显式等待 判断 是否上传成功
+//        webDriverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(
+//                "//*[@id=\"WU_FILE_0\"]//span[@class=\"paperDoc\"]"),uploadFileName1));
+//        webDriverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(
+//                "//*[@id=\"WU_FILE_0\"]/p[@class=\"state startBtn success\"]"), "已上传"));
+//        System.out.println("上传成功！");
 //    }
+//
+//    /* 6：操作 Web 页面的 滚动条
+//    *
+//    *  */
+//    @Parameters("baseUrl3")
+//    @Test()
+//    public void operateScrollbar(String baseUrl3) throws InterruptedException {
+//        driver.get(baseUrl3);
+//
+//        /* 滑动 页面的滚动条 到 页面的最下方
+//        *  */
+//        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+//        Thread.sleep(2000);
+//        /* 滑动 页面的滚动条 向下滑动一定距离
+//         *  */
+//        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,1000);");
+//        Thread.sleep(2000);
+//        /* 滑动 页面的滚动条 到页面中某一个页面元素的位置
+//        *  */
+//        WebElement webElement = driver.findElement(By.xpath("/html/body/div[11]//span[contains(text(),\"国内特价机票\")]"));
+//        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+//        Thread.sleep(2000);
+//    }
+//
+//    /* 7：通过 Robot 对象操作键盘
+//    *         对高频的键盘操作（黏贴、Tab 切换焦点、Enter 确认）作了封装
+//    *  */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void testRobotOperateKeyboard(String baseUrl1) throws AWTException, InterruptedException {
+//        driver.get(baseUrl1);
+//
+//        // 定位到 "搜索输入框"页面元素
+//        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
+//        // 显式等待 判断 "搜索输入框" 是否可单击
+//        WebDriverWait webDriverWait = new WebDriverWait(driver,2);
+//        webDriverWait.until(ExpectedConditions.elementToBeClickable(searchInputBox));
+//
+//        searchInputBox.click();
+//        String keyword = "百度";
+//        // 调用 封装好的 goRobotCtrlV 把剪贴板数据 黏贴到 "搜索输入框"中
+//        goRobotCtrlV(keyword);
+//        // 调用 封装好的 goRobotTab
+//        goRobotTab();
+//        // 调用 封装好的 goRobotEnter
+//        goRobotEnter();
+//
+//        Thread.sleep(2000);
+//    }
+//    // 封装好的 goRobotEnter
+//    protected void goRobotEnter() throws AWTException {
+//        Robot robot = new Robot();
+//        robot.keyPress(KeyEvent.VK_ENTER);  // 按下 Enter 键
+//        robot.keyRelease(KeyEvent.VK_ENTER);  // 释放 Enter 键
+//    }
+//    // 封装好的 goRobotTab
+//    protected void goRobotTab() throws AWTException {
+//        Robot robot = new Robot();
+//        robot.keyPress(KeyEvent.VK_TAB);  // 按下 Tab 键
+//        robot.keyRelease(KeyEvent.VK_TAB);  // 释放 Tab 键
+//    }
+//    // 封装好的 goRobotCtrlV
+//    protected void goRobotCtrlV(String keyword) throws AWTException {
+//        /*
+//        *  定义一个 StringSelection 对象，存放 keyword，
+//        *   使用 ToolKit 对象的 getSystemClipboard().setContents() 把 keyword 传送到 剪贴板 中，变成 剪贴板数据
+//        *    注意，不是 Toolkit.getToolkit().getSystemClipboard().setSecurityContext ，二者不属于同一个包
+//        *  */
+//        StringSelection stringSelection = new StringSelection(keyword);
+//        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+//        // 定义一个 Robot 对象，用来实现键盘的"按键"操作
+//        Robot robot = new Robot();
+//        robot.keyPress(KeyEvent.VK_CONTROL);   // 按下 Ctrl 键
+//        robot.keyPress(KeyEvent.VK_V);  // 按下 V 键
+//        robot.keyRelease(KeyEvent.VK_CONTROL);  // 释放 Ctrl 键
+//        robot.keyRelease(KeyEvent.VK_V);  // 释放 V 键
+//    }
+
+    /* 8：
+     *
+     *
+     *
+     */
+
+
+
+
+
+
 
 }

@@ -191,7 +191,7 @@ public class WebDriverApiExamples {
      * */
     @Parameters("baseUrl1")
     @Test
-    public void ActionsCtrlACV(String baseUrl1) throws InterruptedException, AWTException {
+    public void goActionsCtrlACV(String baseUrl1) throws InterruptedException, AWTException {
         driver.get(baseUrl1 + "/");
         WebElement inputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
         inputBox.clear();
@@ -228,7 +228,7 @@ public class WebDriverApiExamples {
      * */
     @Parameters("baseUrl1")
     @Test
-    public void RobotCtrlACV(String baseUrl1) throws InterruptedException, AWTException {
+    public void goRobotCtrlACV(String baseUrl1) throws InterruptedException, AWTException {
         driver.get(baseUrl1 + "/");
         WebElement inputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
         inputBox.clear();
