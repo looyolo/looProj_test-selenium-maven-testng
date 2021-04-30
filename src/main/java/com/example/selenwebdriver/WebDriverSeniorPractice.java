@@ -447,10 +447,42 @@ public class WebDriverSeniorPractice {
 //
 //        Thread.sleep(2000);
 //    }
+//
+//    /* 9：操作表格
+//    *         使用 封装好的 表格公用操作类，基于该类对表格进行各种操作。
+//    *          注意：下面这个例子中，第一行是 表头 th ，不是 tr
+//    *
+//    * */
+//    @Parameters("baseUrl6")
+//    @Test
+//    public void operateTable(String baseUrl6) throws InterruptedException {
+//        driver.get(baseUrl6 + "/");
+//
+//        WebElement webTable = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[text()=\"常用对照表\"]/following-sibling::div/table"));
+//        Assert.assertTrue(webTable.isDisplayed());
+//
+//        // webTable 页面表格对象 绑定一个 tableCommonOperations 表格公用操作类对象
+//        TableCommonOperations tableCommonOperations = new TableCommonOperations(webTable);
+//        // 获取 表头元素
+//        List<WebElement> tableHeadElements = tableCommonOperations.getTableHeadElements();
+//        // 获取 表格行数
+//        int tableRows = tableCommonOperations.getTableRows();;
+//        // 获取 表格列数
+//        int tableColumns = tableCommonOperations.getTableColumns();
+//        // 定位到 表格中 某行某列 的 单元格，行号，列号 是从 0 开始的
+//        WebElement tableCellElement = tableCommonOperations.getTableCellElement(2, 1);
+//        // 获取 表格中 某行某列 的 单元格中 内容，行号，列号 是从 0 开始的
+//        String textInTableCell = tableCommonOperations.getTextInTableCell(2, 1);
+//
+////        System.out.println("表头个数：" + tableHeadElements.size());
+////        System.out.println("表格行数：" + tableRows + " , 表格列数：" + tableColumns);
+////        System.out.println("单元格（2， 1）元素中的文本为 " + tableCellElement.getText());
+////        System.out.println("单元格（2， 1）中的内容为 " + textInTableCell);
+//    }
 
-    /* 9：
+    /* 10：
     *
-    * */
+    *  */
 
 
 

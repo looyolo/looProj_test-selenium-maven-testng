@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Properties;
 
 /* 封装好的 工具类 */
-class PageElementMap {
+public class PageElementMap {
     protected Properties properties = new Properties();
     public PageElementMap(String propertiesFilePath) throws IOException {
         /*
