@@ -32,6 +32,8 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -418,12 +420,37 @@ public class WebDriverSeniorPractice {
 //        robot.keyRelease(KeyEvent.VK_CONTROL);  // 释放 Ctrl 键
 //        robot.keyRelease(KeyEvent.VK_V);  // 释放 V 键
 //    }
+//
+//    /* 8：UI 页面元素地图（UI PageElement Map）
+//     *         能够 使用配置文件 存储 页面元素的 定位方式 和 定位要素，做到分离 测试程序 和 定位信息。
+//     *         封装为 工具类 。
+//     *
+//     *         此部分内容可以作为 自动化框架 组成部分，也是 高级自动化实施水平 的表现，
+//     *
+//     *         适用场景：
+//     *          方便不具备编程基础或不熟悉测试程序的其他团队成员 进行 自定义修改配置来复用。
+//     *
+//     */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void testPageElementMap(String baseUrl1) throws Exception {
+//        driver.get(baseUrl1 + "/");
+//
+//        // 定义一个 pageElementMap 页面元素地图对象
+//        PageElementMap pageElementMap = new PageElementMap("src/main/java/com/example/selenwebdriver/pageElementMap.properties");
+//        // 从 页面元素地图 上定位到需要的页面元素
+//        WebElement searchButton = driver.findElement(pageElementMap.getLocator("Sogou.HomePage.searchButton"));
+//        WebElement searchInputBox = driver.findElement(pageElementMap.getLocator("Sogou.HomePage.searchInputBox"));
+//        // 操作页面元素
+//        searchInputBox.sendKeys("百度");
+//        searchButton.click();
+//
+//        Thread.sleep(2000);
+//    }
 
-    /* 8：
-     *
-     *
-     *
-     */
+    /* 9：
+    *
+    * */
 
 
 
