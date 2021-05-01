@@ -1,11 +1,16 @@
 package com.example.selenwebdriver;
 
+import com.codeborne.selenide.commands.TakeScreenshot;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.logger.AllureLogger;
 
 import io.qameta.allure.selenide.AllureSelenide;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.DateUtils;
+import org.assertj.core.util.DateUtil;
+import org.assertj.core.util.Files;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.By;
@@ -28,16 +33,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 /*
  * 代码解释：
@@ -479,11 +485,135 @@ public class WebDriverSeniorPractice {
 ////        System.out.println("单元格（2， 1）元素中的文本为 " + tableCellElement.getText());
 ////        System.out.println("单元格（2， 1）中的内容为 " + textInTableCell);
 //    }
+//
+//    /* 10：高亮显示正在被操作的页面元素
+//     *         在测试过程中，经常会调试测试程序，高亮显示被操作的页面元素可以提高调试的效率，
+//     *          提示目前正在操作的页面元素。
+//     *
+//     *  */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void displayHighlighted(String baseUrl1) throws InterruptedException {
+//        driver.get(baseUrl1 + "/");
+//
+//        WebElement searchInputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
+//        // 调用 封装好的 高亮显示函数
+//        highlight(driver, searchInputBox);
+//        searchInputBox.sendKeys("百度");
+//        searchInputBox.click();
+//
+//        Thread.sleep(2000);
+//    }
+//    // 封装好的 高亮显示函数
+//    protected void highlight(WebDriver webDriver, WebElement webElement) {
+//        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor)webDriver);
+//            javascriptExecutor.executeScript("arguments[0].setAttribute('style', arguments[1]);",
+//                    webElement, "background-color:#ffffcc; border:1px solid #f30");
+//    }
+//
+//    /* 11：在断言失败时，截屏保存为图片文件，并 精确比对 网页截图
+//    *         代码解释：
+//    *             在断言失败时，对当前浏览器显示的内容进行截屏，截屏内容先由 File 文件对象保存；
+//    *             在磁盘上会自动创建一个以 当前日期（格式化为 yyyy-mm-dd ）命名的目录，存放截屏得到的图片文件；
+//    *             截屏内容真正写入到磁盘上时，会自动保存为以 当前时间点（格式化为 hh-MM-ss ）命名的 .png 图片文件；
+//    *             精确比对 网页截图.
+//    *
+//    *         过程中，借助 2 个工具类：
+//    *             org.apache.commons.io.FileUtils
+//    *             org.assertj.core.util.DateUtil
+//    *
+//    *  */
+//    @Parameters("baseUrl1")
+//    @Test
+//    public void testTakeScreenshotWhenAssertFail(String baseUrl1) throws IOException {
+//        driver.get(baseUrl1 + "/");
+//
+//        WebElement searchButton = driver.findElement(By.xpath("//*[@id=\"stb\"]"));
+//        try {
+//            // 断言 "搜索"按钮 是否为可选状态，因为实际上是不可选的，这里断言会失败
+//            Assert.assertTrue(searchButton.isSelected());
+//        } catch (AssertionError e) {
+//            e.printStackTrace();
+//        } finally {
+//            // 断言 失败，调用 封装好的 截屏函数
+//            File screenshotFile = takeScreenshotWhenAssertFail(driver);
+//            // 确定 期望的截图文件
+//            String expectedImageFilePathName = "C:\\selenwebdriver_test_screenshot\\"
+//                    + "Sogou.Homepage_expected.png";
+//            File expectedImageFile = new File(expectedImageFilePathName);
+//            // 调用 封装好的 精确比对函数，精确比对 2 张图片
+//            Assert.assertTrue(compareImagesAccurately(screenshotFile, expectedImageFile));
+//            System.out.println("精确比对结果：一致！");
+//        }
+//    }
+//    // 封装好的 精确比对函数
+//    protected boolean compareImagesAccurately(File actualImageFile, File expectedImageFile) throws IOException {
+//        /*
+//        * 以下部分为 2 个图片文件的像素比对的算法实现。
+//        *     获取 2 个图片文件的像素个数、像素数值，循环遍历逐一比对，只要有一个不相同，则退出循环，标记为比对结果不一致。
+//        *
+//        *  */
+//        // 把 图片文件 读取到 图片缓冲区对象中，相当于生成一份副本
+//        BufferedImage expectedBufferedImage = ImageIO.read(expectedImageFile);
+//        BufferedImage actualBufferedImage = ImageIO.read(actualImageFile);
+//        // 获取 图片缓冲区对象中的"Raster 栅格"数据，并进一步获取其中关联的 "Pixel 像素" 数据
+//        DataBuffer expectedDataBuffer =  expectedBufferedImage.getData().getDataBuffer();
+//        DataBuffer actualDataBuffer = actualBufferedImage.getData().getDataBuffer();
+//        // 统计 2 张图片的 "Pixel 像素" 的总数
+//        int expectedPixelSize = expectedDataBuffer.getSize();
+//        int actualPixelSize = actualDataBuffer.getSize();
+//        // 遍历 对比 2 张图片的每一个 "Pixel 像素"
+//        if (expectedPixelSize == actualPixelSize) {
+//            for (int i = 0; i < expectedPixelSize; i++) {
+//                if (expectedDataBuffer.getElem(i) != actualDataBuffer.getElem(i)) {
+//                    return false;
+//                }
+//                break;
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//    // 封装好的 截屏函数
+//    protected File takeScreenshotWhenAssertFail(WebDriver webDriver) throws IOException {
+//        // 指定 文件路径，新建 一个目录文件，调用 DateUtils 类把 目录文件名称 格式化为 yyyy-mm-dd
+//        String screenshotFilePathName = "C:\\selenwebdriver_test_screenshot\\"
+//                + DateUtil.yearOf(new Date()) + "-"
+//                + DateUtil.monthOf(new Date()) + "-"
+//                + DateUtil.dayOfMonthOf(new Date());
+//        File screenshotFileDirectory = new File(screenshotFilePathName);
+//        // 使用 FileUtils.forceMkdir 的好处是，会自动创建 整个文件路径 ，不建议使用 screenshotFileDirectory.mkdir()
+//        if (!screenshotFileDirectory.exists()) {
+//            FileUtils.forceMkdir(screenshotFileDirectory);
+//        }
+//        // 截屏，图片数据会保存到 File 对象中，注意，这里还没有真正保存到指定目录下
+//        File screenshotFileSource = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        // 调用 DateUtils 类把 图片文件名称 格式化为 hh-MM-ss ，扩展名为 .png
+//        String screenshotFileName = screenshotFilePathName + "\\"
+//                + DateUtil.hourOfDayOf(new Date()) + "-"
+//                + DateUtil.minuteOf(new Date()) + "-"
+//                + DateUtil.secondOf(new Date()) + ".png";
+//        File screenshotFileDestination = new File(screenshotFileName);
+//        // 把 File 对象中的图片数据 真正写入到 磁盘 中，并命名为指定格式。这里注意不是 copyFileToDirectory，容易混淆
+//        FileUtils.copyFile(screenshotFileSource, screenshotFileDestination);
+//
+//        return screenshotFileDestination;
+//    }
 
-    /* 10：
+
+
+
+
+
+
+    /* 12：使用 Log4j 在测试过程中打印执行日志
     *
     *  */
 
+    /* 13：操作富文本框
+     *
+     * */
 
 
 

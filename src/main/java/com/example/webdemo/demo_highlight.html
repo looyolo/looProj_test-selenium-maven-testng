@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> js 实现 div 闪烁v原理及实现代码 </title>
+</head>
+<body>
+    <a href="https://www.jb51.net/article/51464.htm"> js 实现 div 闪烁v原理及实现代码 </a>
+    <div style="width: 50px;height: 50px;background-color: cyan;display: block;" id="showZone"></div>
+</body>
+</html>
+<script>
+window.onload=function(){
+    var obj = document.getElementById("showZone");
+    var timer = null;
+    obj.onclick=function(){
+        var i = 0;
+        clearInterval(timer);
+        timer = setInterval(function(){
+            obj.style.display = i++ % 2 ? "none":"block";  // 这个写法比 if..else 简洁了好多
+            i>8 && clearInterval(timer);  // 这个短路用的经典啊
+        },80);
+    };
+};
+</script>

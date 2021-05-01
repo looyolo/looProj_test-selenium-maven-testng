@@ -122,7 +122,7 @@
     <orderEntry type="library" name="Maven: net.lingala.zip4j:zip4j:2.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest:2.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.17.1" level="project" />
+    <orderEntry type="library" name="Maven: org.assertj:assertj-core:3.17.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.truth:truth:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.checkerframework:checker-qual:3.7.0" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.13.1" level="project" />

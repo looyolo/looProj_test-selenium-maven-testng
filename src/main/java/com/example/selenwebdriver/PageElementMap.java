@@ -53,6 +53,6 @@ public class PageElementMap {
             return By.className(locatorFactor);
         } else if (locatorMethod.equalsIgnoreCase("tagName")) {  // tagName 定位方式
             return By.tagName(locatorFactor);
-        } else throw (new Exception("出现未经定义的定位方式，可能是 JQuery 定位方式，请检查配置文件！"));
+        } else throw new Exception("出现未经定义的定位方式，可能是 JQuery 定位方式，请检查配置文件！");
     }
 }
