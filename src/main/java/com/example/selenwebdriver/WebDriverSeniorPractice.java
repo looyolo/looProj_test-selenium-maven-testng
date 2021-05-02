@@ -601,15 +601,17 @@ public class WebDriverSeniorPractice {
 //        return screenshotFileDestination;
 //    }
 
-
-
-
-
-
-
-    /* 12：使用 Log4j 在测试过程中打印执行日志
+    /* 12：使用 logback 在测试过程中打印执行日志
     *
     *  */
+
+
+
+
+
+
+
+
 
     /* 13：操作富文本框
      *
