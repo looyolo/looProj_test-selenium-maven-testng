@@ -8,10 +8,12 @@ import com.epam.jdi.light.logger.AllureLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.hc.core5.http.nio.ssl.BasicServerTlsStrategy;
 import org.apache.http.client.utils.DateUtils;
 import org.assertj.core.util.DateUtil;
 import org.assertj.core.util.Files;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.codehaus.plexus.context.DefaultContext;
 import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -373,8 +375,9 @@ public class WebDriverSeniorPractice {
 //        Thread.sleep(2000);
 //    }
 //
-//    /* 7：通过 Robot 对象操作键盘
-//    *         对高频的键盘操作（黏贴、Tab 切换焦点、Enter 确认）作了封装
+//    /* 7：通过 Robot 对象 操作 键盘
+//    *         对高频的键盘操作（黏贴、Tab 切换焦点、Enter 确认）作了封装。
+//    *
 //    *  */
 //    @Parameters("baseUrl1")
 //    @Test
@@ -600,22 +603,92 @@ public class WebDriverSeniorPractice {
 //
 //        return screenshotFileDestination;
 //    }
-
-    /* 12：使用 logback 在测试过程中打印执行日志
-    *
-    *  */
-
-
-
-
-
-
-
-
-
-    /* 13：操作富文本框
-     *
-     * */
+//
+//    /* 12：操作富文本框
+//     *         富文本框 的技术实现 和 普通文本框的 存在很大差别，常见实现技术是用到了 frame/iframe 标签，并且
+//     *             在 frame/iframe 内部实现了一个完整的 HTML 网页结构。因此，在定位过程中，会有所不同。
+//     *
+//     *         富文本框 其实对应的就是 .html 文件中的 body 标签。
+//     *
+//     * */
+//    @Parameters("demoUrl2")
+//    @Test
+//    public void operateRichTextEditor(String demoUrl2) throws InterruptedException, AWTException {
+//        driver.get(demoUrl2);
+//
+//        /*
+//        * 方式 1：
+//        *      通过 JavascriptExecutor 对象执行 javascript 脚本实现
+//        *
+//        *      区别于方式 2 ，
+//        *          方式 1 可以支持输入 HIML 格式内容，但 不同网页产品的 富文本框的实现机制不同，定位起来可能会有一些难度。
+//        *
+//        *  */
+//        // 定位到 富文本框 所在的 iframe 页面对象
+//        WebElement iframe = driver.findElement(By.xpath("//*[@id=\"LAY_layedit_1\"]"));
+//        // 切换 进入到 富文本框 所在的 iframe 页面对象
+//        driver.switchTo().frame(iframe);
+//        WebElement richTextEditorInIframe = driver.findElement(By.tagName("body"));
+//        // 定位到 富文本框 页面对象，也就是 body 标签
+//        Assert.assertTrue(richTextEditorInIframe.isDisplayed());
+//        // 赋值给 富文本框 页面对象的 .innerHTML 或 .innerText ，可以输入 HTML 格式 或 Text 文本内容，作对比，找差异
+//        JavascriptExecutor javascriptExecutor = (JavascriptExecutor)driver;
+//        javascriptExecutor.executeScript("arguments[0].innerHTML = '<div> 这是一个 富文本框 ！ </div>'", richTextEditorInIframe);
+////        javascriptExecutor.executeScript("arguments[0].innerText = '这是一个 富文本框 ！'", richTextEditorInIframe);
+//        // 切换 返回到 默认的页面区域
+//        driver.switchTo().defaultContent();
+//
+//        // 点击 "获取编辑器内容"按钮，这里会触发一次 浏览器 alert 弹窗
+//        WebElement getEditorTextButton = driver.findElement(By.xpath("//*[@id=\"LAY_preview\"]//button[text()=\"获取编辑器内容\"]"));
+//        getEditorTextButton.click();
+//        Thread.sleep(5000);
+//        // 切换到 浏览器弹框
+//        Alert alert = driver.switchTo().alert();
+//        try {
+//            // 获取 浏览器弹框 的 文本内容，断言 弹窗中 文本内容 是否包含"这是一个 富文本框 ！"
+//            Assert.assertTrue(alert.getText().contains("这是一个 富文本框 ！"));
+//        } catch (NoAlertPresentException e) {
+//            e.printStackTrace();
+//        }
+//        // 点击 浏览器弹窗中 "确定"按钮
+//        alert.accept();
+//
+//        // 切换 返回到 默认的页面区域
+//        driver.switchTo().defaultContent();
+//
+//        /*
+//         * 方式 2：
+//         *     通过 前面 介绍过的 Robot 类对象 操作键盘 来实现
+//         *         调用 封装好的 goRobotTab 切换焦点 到 富文本框
+//         *         调用 封装好的 goRobotCtrlV 来向 富文本框中 输入内容
+//         *
+//         *     区别于方式 1 ，
+//         *         方式 2 不管哪一种实现技术的富文本框，只要找到它上面的相邻元素，通过按 Tab 键的方式，一定都可以定位到富文本框。
+//         *          不需要 driver.switchTo().frame(iframe) ，但 不支持 输入 HTML 格式内容
+//         *
+//         *  */
+//        // 刷新页面 恢复到 初始状态
+//        driver.navigate().refresh();
+//        // 点击一下 "预览"tab页名
+//        driver.findElement(By.xpath("//*[text()=\"预览\"]")).click();
+//        // 按 2 下 Tab 键，可以切换焦点 到 富文本框 ，这时鼠标光标会在 文本框内 闪动
+//        goRobotTab();
+//        goRobotTab();
+//        // 输入内容到框内，可以对比 HTML 格式 与 Text 时的差异
+//        goRobotCtrlV("<div> 这是一个 富文本框 ！ </div>");
+////        goRobotCtrlV("这是一个 富文本框 ！");
+//
+//        // 注意，refresh 页面刷新后，之前定位到的元素 会失效，需要重新定位。
+//        getEditorTextButton = driver.findElement(By.xpath("//*[@id=\"LAY_preview\"]//button[text()=\"获取编辑器内容\"]"));
+//        getEditorTextButton.click();
+//        Thread.sleep(5000);
+//        try {
+//            Assert.assertTrue(alert.getText().contains("这是一个 富文本框 ！"));
+//        } catch (NoAlertPresentException e) {
+//            e.printStackTrace();
+//        }
+//        alert.accept();
+//    }
 
 
 

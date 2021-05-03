@@ -98,7 +98,11 @@ public class WebDriverApiExamples {
         driver.navigate().to(baseUrl1 + "/");
     }
 
-    /* 2: 返回访问上一个网页，又前进到下一个网页,并刷新当前页面（模拟单击浏览器的 后退、前进、重新加载 功能）*/
+    /* 2: 返回访问上一个网页，又前进到下一个网页,并刷新当前页面（模拟单击浏览器的 后退、前进、重新加载 功能）
+    *
+    *          要注意的地方是，refresh 页面刷新后，之前定位到的元素 会失效，需要重新定位。
+    *
+    * */
     @Parameters({"baseUrl1", "baseUrl2"})
     @Test
     public void visitRecentUrl(String baseUrl1, String baseUrl2) {

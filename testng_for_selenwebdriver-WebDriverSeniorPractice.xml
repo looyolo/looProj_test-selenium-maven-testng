@@ -17,6 +17,7 @@
         <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
+        <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
@@ -46,6 +47,7 @@
         <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
+        <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
