@@ -16,8 +16,10 @@
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
         <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
+        <parameter name="baseUrl7" value="https://baike.baidu.com/item/%E6%85%95%E8%AF%BE/4855871?fr=aladdin"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
+        <parameter name="demoUrl3" value="http://www.youkud.com/tool/paint.php"/>
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
@@ -29,7 +31,7 @@
         <parameter name="uploadDirectory" value="C:\selenwebdriver_test_upload"/>
         <parameter name="uploadFileName1" value="论文1.doc"/>
         <classes>
-            &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
+             添加测试类，可以是多个
             <class name="com.example.selenwebdriver.WebDriverSeniorPractice"/>
         </classes>
     </test>-->
@@ -46,8 +48,10 @@
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
         <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
+        <parameter name="baseUrl7" value="https://baike.baidu.com/item/%E6%85%95%E8%AF%BE/4855871?fr=aladdin"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
+        <parameter name="demoUrl3" value="http://www.youkud.com/tool/paint.php"/>
         <parameter name="processName" value="iexplore.exe"/>
         <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
         <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
