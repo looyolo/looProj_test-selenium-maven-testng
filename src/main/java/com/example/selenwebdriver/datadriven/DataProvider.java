@@ -58,6 +58,15 @@ public class DataProvider {
         }
     }
 
+    @org.testng.annotations.DataProvider
+    public static Object[][] searchWords() {
+        return new Object[][]{
+                {"蝙蝠侠", "主演", "迈克尔"},
+                {"超人", "导演", "唐纳"},
+                {"生化危机", "编剧", "安德森"}
+        };
+    }
+
     /*
     * 测试逻辑：
     *     （1）打开搜狗首页
@@ -69,7 +78,7 @@ public class DataProvider {
     *     @Parameters("baseUrl1") 与 @Test(dataProvider = "searchWords") 不允许同时对 testDataProvider 使用
     *
     * 代码解释：
-    *     测试脚本会自动依次打开三次浏览器，分贝输入三组不同的关键词进行搜索，并且三次搜索结果均可断言成功。
+    *     测试脚本会自动依次打开三次浏览器，分别输入三组不同的关键词进行搜索，并且三次搜索结果均可断言成功。
     *     其中，使用 @DataProvider 注解将当前方法中的返回对象作为测试脚本的 测试数据集，取名为"searchWords"。
     *         取名可以在 2 个地方，在 @org.testng.annotations.DataProvider(name = "searchWords") 或 当前方法名。
     *             至少得有一个地方的 取名 和 @Test(dataProvider = "searchWords") 中的保持一致，才可以读取到测试数据集。
@@ -83,15 +92,6 @@ public class DataProvider {
         driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
         Thread.sleep(2000);
         Assert.assertTrue(driver.getPageSource().contains(searchResult));
-    }
-
-    @org.testng.annotations.DataProvider
-    public static Object[][] searchWords() {
-        return new Object[][]{
-                {"蝙蝠侠", "主演", "迈克尔"},
-                {"超人", "导演", "唐纳"},
-                {"生化危机", "编剧", "安德森"}
-        };
     }
 
 }

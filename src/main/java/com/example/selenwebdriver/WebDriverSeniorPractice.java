@@ -1,26 +1,12 @@
 package com.example.selenwebdriver;
 
-import com.codeborne.selenide.commands.TakeScreenshot;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.logger.AllureLogger;
-
-import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.hc.core5.http.nio.ssl.BasicServerTlsStrategy;
-import org.apache.http.client.utils.DateUtils;
 import org.assertj.core.util.DateUtil;
-import org.assertj.core.util.Files;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.codehaus.plexus.context.DefaultContext;
 import org.openqa.selenium.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -43,9 +29,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /*

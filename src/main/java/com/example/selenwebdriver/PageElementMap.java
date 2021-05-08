@@ -14,9 +14,9 @@ public class PageElementMap {
         * 读取 Properties 配置文件
         *  文件路径可以是 相对路径、绝对路径
         *  */
-        // 知道了 propertiesFilePath 文件路径，读取它之前，要先定义一个 FileInputStream 文件输入流对象
+        // 知道了 propertiesFilePath 文件路径，读取它之前，要先定义一个 FileInputStream 文件输入流对象，层级：低级，字节流
         FileInputStream fileInputStream = new FileInputStream(propertiesFilePath);
-        // 有了 FileInputStream 之后，要定义一个 Reader 输入流读取器对象，从文件输入流中读取数据
+        // 有了 FileInputStream 之后，要定义一个 Reader 输入流读取器对象，从文件输入流中读取数据，层级：中级，字符流
         Reader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8") ;
         // Properties 对象 加载 inputStreamReader 读取到的数据，也就是 页面元素的定位表达式 等配置信息
         properties.load(inputStreamReader);

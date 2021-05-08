@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.apache.httpcomponents:httpmime:4.5.12">
+  <library name="Maven: com.epam.jdi:jdi-light:1.2.16">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpmime/4.5.12/httpmime-4.5.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/epam/jdi/jdi-light/1.2.16/jdi-light-1.2.16.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpmime/4.5.12/httpmime-4.5.12-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/epam/jdi/jdi-light/1.2.16/jdi-light-1.2.16-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpmime/4.5.12/httpmime-4.5.12-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/epam/jdi/jdi-light/1.2.16/jdi-light-1.2.16-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
