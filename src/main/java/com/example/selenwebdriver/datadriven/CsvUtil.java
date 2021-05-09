@@ -16,10 +16,11 @@ public class CsvUtil {
         // 有了 Reader 输入流读取器对象之后，定义一个 文本行 缓冲读取器对象，调用 readLine 按行读取，层级：高级，文本行 (即文本中一行字符串)
         //  用 readLine 按行读取到的 文本行数据，存放在 内存上，需要定义一个 List 容器对象 来进行存储
         BufferedReader bufferedReader = new BufferedReader(reader);
-        // 这一行在这里的作用是，忽略读取 第一行（即 标题行）
-        bufferedReader.readLine();
-        // 定义一个 List 容器对象来存储 文本行内容 (即文本中每一行字符串)，遍历读取 除标题行之外的 每一行文本内容
+
+        // 定义一个 List 容器对象，用来存放 文本行内容 (即文本中每一行字符串)，遍历读取 除标题行之外的 每一行文本内容
         List<Object[]> records = new ArrayList<Object[]>();
+        //  这一行在这里的作用是，忽略读取 第一行（即 标题行）
+        bufferedReader.readLine();
         String record;
         while ((record = bufferedReader.readLine()) != null) {
             // 原本是一行字符串，分割成 3 段，需要用到 String[] 字符串一维数组
@@ -28,9 +29,11 @@ public class CsvUtil {
             String[] fields = record.split(",");
             records.add(fields);
         }
-        // 关闭 读取器对象，切记 ！！！
+
+        // 关闭 流对象，切记 ！！！
         bufferedReader.close();
         reader.close();
+        csvFileInputStream.close();
 
         // 定义 函数返回值，即 二维数组 Object[][]
         //  二维数组 等同于 一维数组中的元素 仍然是 一维数组，这样容易理解和运用

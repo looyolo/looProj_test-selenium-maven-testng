@@ -62,8 +62,7 @@ public class DataProviderByEXCEL<sheetNameInWorkbook> {
 
     @DataProvider(name = "searchWords")
     public static Object[][] Words() throws IOException {
-        // 调用 CsvUtll 工具类
-//        return CsvUtil.getData(csvFilePath);
+        // 调用 ExcelUtil 工具类
         return ExcelUtil.getData(excelFilePath, sheetNameInWorkbook);
     }
 
@@ -72,7 +71,7 @@ public class DataProviderByEXCEL<sheetNameInWorkbook> {
      *     （1）打开搜狗首页
      *     （2）从 Excel 文件中读取每行前 2 个逗号分隔的中文词 作为 在搜索输入框中输入的 关键词，两个关键词之间有一个空格
      *     （3）点击 搜索按钮，等待 2 秒，让页面加载完成
-     *     （4）验证搜索结果页面是否包含输 Excel 文件中每行第三个中文词，包含则认为测试执行成功，否则失败
+     *     （4）验证搜索结果页面是否包含 Excel 文件中每行第三个中文词，包含则认为测试执行成功，否则失败
      *
      * 注意：
      *     @Parameters("baseUrl1") 与 @Test(dataProvider = "searchWords") 不允许同时对 testDataProvider 使用

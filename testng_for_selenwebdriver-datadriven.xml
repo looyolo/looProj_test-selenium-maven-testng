@@ -34,7 +34,8 @@
             <!-- 添加测试类，可以是多个 -->
 <!--            <class name="com.example.selenwebdriver.datadriven.DataProvider"/>-->
 <!--            <class name="com.example.selenwebdriver.datadriven.DataProviderByCSV"/>-->
-            <class name="com.example.selenwebdriver.datadriven.DataProviderByEXCEL"/>
+<!--            <class name="com.example.selenwebdriver.datadriven.DataProviderByEXCEL"/>-->
+            <class name="com.example.selenwebdriver.datadriven.DataProviderByMYSQL"/>
         </classes>
     </test>
 </suite>

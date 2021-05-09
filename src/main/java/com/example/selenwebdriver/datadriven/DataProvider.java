@@ -4,9 +4,7 @@ import com.epam.jdi.light.logger.AllureLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -14,8 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 public class DataProvider {
     WebDriver driver;
@@ -72,7 +68,7 @@ public class DataProvider {
     *     （1）打开搜狗首页
     *     （2）在 搜索输入框 输入 2 个关键词
     *     （3）点击 搜索按钮，等待 2 秒，让页面加载完成
-    *     （4）验证搜索结果页面是否包含输入的关键词，包含则认为测试执行成功，否则失败
+    *     （4）验证搜索结果页面是否包含输入的每行第三个中文词，包含则认为测试执行成功，否则失败
     *
     * 注意：
     *     @Parameters("baseUrl1") 与 @Test(dataProvider = "searchWords") 不允许同时对 testDataProvider 使用

@@ -39,13 +39,14 @@ public class ExcelUtil {
             sheet = workbook.getSheet(sheetNameInWorkbook);
         }
 
-        // 获取 总行数，再进一步 循环获取 每行每个单元格 的内容，用一个 List 容器来存放
-        //  注意： Excel 文件的 行号、列号 都是从 0 开始的。默认第一行为标题行，index = 0 , 所以，读取 行数据是从第 index = 1 开始
-        //        在没有合并单元格的情形下，通过定义 "int rowCount = getPhysicalNumberOfRows()" 直接得出 （物理）行总数 即可
-        //        在出现合并单元格时，通过定义 "int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum() + 1" 计算得出 （逻辑）行总数
-        //        对于 列总数（即 单元格总数），处理逻辑也一样。
-        int rowCount = sheet.getPhysicalNumberOfRows();
+        // 定义一个 List 容器对象，用来存放 每行每个单元格 的内容
         List<Object[]> records = new ArrayList<Object[]>();
+        //  获取 总行数，再进一步 循环获取 每行每个单元格 的内容
+        //   注意： Excel 文件的 行号、列号 都是从 0 开始的。默认第一行为标题行，index = 0 , 所以，读取 行数据是从第 index = 1 开始
+        //         在没有合并单元格的情形下，通过定义 "int rowCount = getPhysicalNumberOfRows()" 直接得出 （物理）行总数 即可
+        //         在出现合并单元格时，通过定义 "int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum() + 1" 计算得出 （逻辑）行总数
+        //         对于 列总数（即 单元格总数），处理逻辑也一样。
+        int rowCount = sheet.getPhysicalNumberOfRows();
         for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
             // 定义 当前行
             Row currentRow = sheet.getRow(rowIndex);
@@ -56,16 +57,17 @@ public class ExcelUtil {
 
             // 获取 当前行 里面的 单元格总数
             int cellCountInCurrentRow = currentRow.getPhysicalNumberOfCells();
-            //  定义一个与 当前行 里面的 单元格总数相同的 String 一位数组 来存放 单元格的内容
+            //  定义一个 String[] 一维数组，数组长度 等于 当前行 里面的 单元格总数，用来存放 单元格的内容。
+            //   注意：每迭代一次 当前行 ，就生成一个 String[] 数组对象。
             String[] fields = new String[cellCountInCurrentRow];
-            //   循环获取 当前行 每个单元格 的内容
+            //    循环获取 当前行 每个单元格 的内容
             for (int cellIndex = 0; cellIndex < cellCountInCurrentRow; cellIndex++) {
                 Cell cell = currentRow.getCell(cellIndex);
-                //   判断 单元格 的内容 是否为 字符串类型
+                // 判断 单元格 的内容 是否为 字符串类型
                 if (cell.getCellType() == CellType.STRING) {
                     fields[cellIndex] = cell.getStringCellValue();
                 }
-                //   判断 单元格 的内容 是否为 日期类型，是的话，简单日期格式化后，转为字符串
+                // 判断 单元格 的内容 是否为 日期类型，是的话，简单日期格式化后，转为字符串
                 if (cell.getCellType() == CellType.NUMERIC) {
                     if (DateUtil.isCellDateFormatted(cell)) {
                         fields[cellIndex] = (new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(cell.getDateCellValue());
@@ -74,6 +76,9 @@ public class ExcelUtil {
             }
             records.add(fields);
         }
+
+        // 关闭 流对象，切记 ！！！
+        fileInputStream.close();
 
         // 定义 函数返回值，即 二维数组 Object[][]
         //  二维数组 等同于 一维数组中的元素 仍然是 一维数组，这样容易理解和运用
