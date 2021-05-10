@@ -3,8 +3,8 @@
 <!-- Default Suite -->
 <suite name="Default Suite" parallel="tests" thread-count="2">
     <!-- Java_Learn -->
-<test name="ChromeTest">
-    <!-- 添加参数值对，可以是多个 -->
+    <test name="ChromeTest">
+        <!-- 添加参数值对，可以是多个 -->
         <!--  浏览器设置  -->
         <parameter name="browser" value="chrome"/>
         <parameter name="whichDriver" value="webdriver.chrome.driver"/>
@@ -17,6 +17,7 @@
         <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
         <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
         <parameter name="baseUrl7" value="https://baike.baidu.com/item/%E6%85%95%E8%AF%BE/4855871?fr=aladdin"/>
+        <parameter name="baseUrl8" value="https://mail.126.com/"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
         <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
         <parameter name="demoUrl3" value="http://www.youkud.com/tool/paint.php"/>
@@ -32,10 +33,8 @@
         <parameter name="uploadFileName1" value="论文1.doc"/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
-            <class name="com.example.selenwebdriver.datadriven.DataProvider"/>
-            <class name="com.example.selenwebdriver.datadriven.DataProviderByCSV"/>
-            <class name="com.example.selenwebdriver.datadriven.DataProviderByEXCEL"/>
-            <class name="com.example.selenwebdriver.datadriven.DataProviderByMYSQL"/>
+            <class name="com.example.selenwebdriver.pageobject.POCase_LoginPage"/>
+
         </classes>
     </test>
 </suite>
