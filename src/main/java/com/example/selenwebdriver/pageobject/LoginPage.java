@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
 import org.testng.Assert;
 
 /*
@@ -13,11 +14,14 @@ import org.testng.Assert;
 *     这些封装好的 页面元素的操作方法 还可以被很多测试逻辑重复调用，从而调高了脚本编写和维护的效率。
 *     如果将来测试过程中的元素定位发生了变化，或者页面的某个操作过程发生了变化，
 *     仅仅修改封装好的测试方法即可实现维护。
+*     另外，通过 继承 LoadableComponent 类，测试程序 可以判断 浏览器 是否加载了正确的网址页面，
+*     只需要重写 isLoaded() 和 Load() 两个方法。这个方式 有助于 使页面对象的页面访问操作更加稳定。
 *
 *  */
-public class LoginPage {
+public class LoginPage extends LoadableComponent<LoginPage> {
     WebDriver driver;
     String url = "https://mail.126.com/";
+    String title = "126网易免费邮--你的专业电子邮";
 
     String userName = "";
     String password = "";
@@ -43,18 +47,24 @@ public class LoginPage {
         this.tips = tips;
     }
 
-    public void load() {
-        driver.get(url);
+//    public void load() {
+//        driver.get(url);
+//    }
+    @Override
+    protected void load() {
+        this.driver.get(url);
     }
 
     public void switchFrame() {
         driver.switchTo().frame(iframe);
     }
 
-    public void login() {
+    public HomePage login() {
         userNameInputBox.sendKeys(userName);
         passwordInputBox.sendKeys(password);
         loginButton.click();
+
+        return new HomePage(driver);
     }
 
     public void allege() {
@@ -63,6 +73,13 @@ public class LoginPage {
 
     public void defaultFrame() {
         driver.switchTo().defaultContent();
+    }
+
+    // 增加了需要覆盖的方法 isLoaded
+    @Override
+    protected void isLoaded() throws Error {
+        // 断言 打开的页面 title 是否包含关键字"126网易免费邮--你的专业电子邮"，以此判断 浏览器 是否加载了正确的网址页面
+        Assert.assertEquals(this.driver.getTitle(), title);
     }
 
 }
