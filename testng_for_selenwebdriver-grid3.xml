@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!-- Default Suite -->
+<suite name="Default Suite" parallel="tests" thread-count="2">
+    <!-- Java_Learn -->
+    <test name="FirefoxTest">
+        <!-- 添加参数值对，可以是多个 -->
+        <!--  浏览器设置  -->
+        <parameter name="browser" value="firefox"/>
+        <parameter name="whichDriver" value="webdriver.gecko.driver"/>
+        <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\geckodriver.exe"/>
+        <!--  测试程序使用的数据  -->
+        <parameter name="Url_Node" value=""/>
+
+        <classes>
+        <!-- 添加测试类，可以是多个 -->
+            <class name="com.example.selenwebdriver.grid3.Grid3Concurrency"/>
+        </classes>
+    </test>
+    <test name="ChromeTest">
+        <!-- 添加参数值对，可以是多个 -->
+        <!--  浏览器设置  -->
+        <parameter name="browser" value="chrome"/>
+        <parameter name="whichDriver" value="webdriver.chrome.driver"/>
+        <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\chromedriver.exe"/>
+        <!--  测试程序使用的数据  -->
+        <parameter name="Url_Node" value=""/>
+
+        <classes>
+            <!-- 添加测试类，可以是多个 -->
+            <class name="com.example.selenwebdriver.grid3.Grid3Concurrency"/>
+        </classes>
+    </test>
+</suite>

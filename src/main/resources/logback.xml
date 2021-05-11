@@ -5,11 +5,18 @@ scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没�
 debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
 -->
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
-    <!-- 定义日志的根目录 -->
-    <property name="LOG_HOME" value="/app/log" />
+    <!--
+    定义日志输出目录:
+    首先 查找系统属性 -Dlog.dir ，若存着则使用它，否则，在当前目录下创建名为 appLogs 的目录
+    -->
+    <property name="LOG_HOME" value="${log.dir:-appLogs}/${appName}" />
     <!-- 定义日志文件名称 -->
     <property name="appName" value="logtest"></property>
-    <!-- 线程上下文关联时使用 -->
+    <!--
+    定义上下文名称，线程关联时使用:
+     每个 logger 都关联到 logger 上下文，默认上下文名称为"default"。
+     但可以使用 <contextName> 设置成其他名字，用于区分不同应用程序的记录。一旦设置，不允许修改。
+     -->
     <contextName>${appName}</contextName>
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">

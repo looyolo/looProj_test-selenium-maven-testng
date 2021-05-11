@@ -5,15 +5,32 @@
     <!-- Java_Learn -->
 <!--    <test name="FirefoxTest">
         &lt;!&ndash; 添加参数值对，可以是多个 &ndash;&gt;
+        &lt;!&ndash;  浏览器设置  &ndash;&gt;
         <parameter name="browser" value="firefox"/>
         <parameter name="whichDriver" value="webdriver.gecko.driver"/>
         <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\geckodriver.exe"/>
+        &lt;!&ndash;  测试程序使用的数据  &ndash;&gt;
         <parameter name="baseUrl1" value="http://www.sogou.com"/>
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
+        <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
+        <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
+        <parameter name="baseUrl7" value="https://baike.baidu.com/item/%E6%85%95%E8%AF%BE/4855871?fr=aladdin"/>
+        <parameter name="baseUrl8" value="https://mail.126.com/"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
+        <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
+        <parameter name="demoUrl3" value="http://www.youkud.com/tool/paint.php"/>
         <parameter name="processName" value="iexplore.exe"/>
+        <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
+        <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
+        <parameter name="downloadFileVisibleName1" value="几种进制的转换工具"/>
+        <parameter name="downloadFileName1" value="jzzh.rar"/>
+        <parameter name="downloadUrl2" value=""/>
+        <parameter name="downloadFileVisibleName2" value=""/>
+        <parameter name="downloadFileName2" value=""/>
+        <parameter name="uploadDirectory" value="C:\selenwebdriver_test_upload"/>
+        <parameter name="uploadFileName1" value="论文1.doc"/>
         <classes>
             &lt;!&ndash; 添加测试类，可以是多个 &ndash;&gt;
             <class name="com.example.selenwebdriver.WebDriverApiExamples"/>
@@ -21,15 +38,32 @@
     </test>-->
     <test name="ChromeTest">
         <!-- 添加参数值对，可以是多个 -->
+        <!--  浏览器设置  -->
         <parameter name="browser" value="chrome"/>
         <parameter name="whichDriver" value="webdriver.chrome.driver"/>
         <parameter name="whereDriver" value="D:\honor_selenium\WebDriver_put_here\chromedriver.exe"/>
+        <!--  测试程序使用的数据  -->
         <parameter name="baseUrl1" value="http://www.sogou.com"/>
         <parameter name="baseUrl2" value="http://www.baidu.com"/>
         <parameter name="baseUrl3" value="https://www.ctrip.com/"/>
         <parameter name="baseUrl4" value="https://cron.qqe2.com/"/>
+        <parameter name="baseUrl5" value="http://check.cnkipass.net/reduce"/>
+        <parameter name="baseUrl6" value="https://tool.oschina.net/commons"/>
+        <parameter name="baseUrl7" value="https://baike.baidu.com/item/%E6%85%95%E8%AF%BE/4855871?fr=aladdin"/>
+        <parameter name="baseUrl8" value="https://mail.126.com/"/>
         <parameter name="demoUrl1" value="https://jqueryui.com/draggable/"/>
+        <parameter name="demoUrl2" value="https://www.layui.com/demo/layedit.html"/>
+        <parameter name="demoUrl3" value="http://www.youkud.com/tool/paint.php"/>
         <parameter name="processName" value="iexplore.exe"/>
+        <parameter name="downloadDirectory" value="C:\selenwebdriver_test_download"/>
+        <parameter name="downloadUrl1" value="http://www.fxdzw.com/xz.asp"/>
+        <parameter name="downloadFileVisibleName1" value="几种进制的转换工具"/>
+        <parameter name="downloadFileName1" value="jzzh.rar"/>
+        <parameter name="downloadUrl2" value=""/>
+        <parameter name="downloadFileVisibleName2" value=""/>
+        <parameter name="downloadFileName2" value=""/>
+        <parameter name="uploadDirectory" value="C:\selenwebdriver_test_upload"/>
+        <parameter name="uploadFileName1" value="论文1.doc"/>
         <classes>
             <!-- 添加测试类，可以是多个 -->
             <class name="com.example.selenwebdriver.WebDriverApiExamples"/>
