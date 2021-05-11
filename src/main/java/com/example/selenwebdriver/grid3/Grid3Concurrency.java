@@ -27,7 +27,7 @@ public class Grid3Concurrency {
     }
 
     @Parameters({"browser", "Url_Node"})
-    @BeforeTest
+    @BeforeClass
     public void setUp_RemoteDriver(String browser, String Url_Node) throws MalformedURLException {
         if (browser.equalsIgnoreCase("firefox")) {
             // 访问 远程 Node 机器上的 操作系统 和 浏览器，需要设定 DesiredCapabilities 对象的属性
@@ -84,9 +84,41 @@ public class Grid3Concurrency {
      *
      * 该类 仅仅 作为 示例魔板，尚未 经过 实际测试
      *
+     * 并发测试 补充知识：
+     *      "testng.xml" 中 <suite name="Default Suite" parallel="tests" thread-count="2"> 这一行代码
+     *       表示 启动 2 个线程，每个线程会运行 test 标签中包含的测试类。
+     *       还可以使用 "method"、"classes"、"instances" 分别作为 parallel 的参数值来实现不同测试用例的并发测试。
+     *       · parallel="method"  TestNG 使用不同的线程来运行测试方法。
+     *       · parallel="tests"  TestNG 使用相同的线程运行每个 test 标签中包含的所有测试方法，但不同 test 的测试方法均运行在不同的线程中。
+     *       · parallel="classes"  TestNG 将相同测试类中的测试方法运行在同一线程中，每个测试类的测试方法均运行在不同的线程中。
+     *       · parallel="instances"  TestNG 将相同实例中的所有测试方法运行在相同线程中，每个实例中的测试方法运行在不同的线程中。
+     *       以上摘抄过来的描述，看得容易让人发晕，
+     *       其实就是说，只要是 method 标签的 或者说是 method 的，都对应有一个线程。其他标签的，一个标签对象只对应一个线程。
+     *       通过设定 parallel 参数值 来执行不同组合的测试用例，可以满足个性化定义的分布式测试的并发需求。
+     *
      *  */
     @Test(dataProvider = "searchWords")
-    public void testGrid3Concurrency(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+    public void testGrid3Concurrency_1(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+        driver.get("https://www.sogou.com/");
+
+        driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
+        driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
+        Thread.sleep(2000);
+        Assert.assertTrue(driver.getPageSource().contains(searchResult));
+    }
+
+    @Test(dataProvider = "searchWords")
+    public void testGrid3Concurrency_2(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+        driver.get("https://www.sogou.com/");
+
+        driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
+        driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
+        Thread.sleep(2000);
+        Assert.assertTrue(driver.getPageSource().contains(searchResult));
+    }
+
+    @Test(dataProvider = "searchWords")
+    public void testGrid3Concurrency_3(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
         driver.get("https://www.sogou.com/");
 
         driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
