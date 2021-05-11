@@ -1,9 +1,9 @@
 package com.example.selenwebdriver.grid3;
 
 import com.epam.jdi.light.logger.AllureLogger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -78,6 +80,7 @@ public class Grid3Concurrency {
      *     （3）点击 搜索按钮，等待 2 秒，让页面加载完成
      *     （4）验证搜索结果页面是否包含输入的每行第三个中文词，包含则认为测试执行成功，否则失败
      *     （5）通过 Grid3 远程方法 进行 "数据驱动 + 并发"测试
+     *     （6）在远程 Node 机器上 进行截屏
      *
      * 更多说明，前往查阅
      *      src/main/java/com/example/selenwebdriver/grid3/Jars_added_by_handcraft/Selenium Server (Grid 3)
@@ -98,32 +101,44 @@ public class Grid3Concurrency {
      *
      *  */
     @Test(dataProvider = "searchWords")
-    public void testGrid3Concurrency_1(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+    public void testGrid3Concurrency_1(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, IOException {
         driver.get("https://www.sogou.com/");
 
         driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
         driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
         Thread.sleep(2000);
+        // 只在远程 Node 机器上截图时，添加这一行代码，否则会截图失败
+        driver = new Augmenter().augment(driver);
+        File screenshotFilesrc = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotFilesrc, new File("C:\\node_screenshot.png"));
         Assert.assertTrue(driver.getPageSource().contains(searchResult));
     }
 
     @Test(dataProvider = "searchWords")
-    public void testGrid3Concurrency_2(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+    public void testGrid3Concurrency_2(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, IOException {
         driver.get("https://www.sogou.com/");
 
         driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
         driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
         Thread.sleep(2000);
+        // 只在远程 Node 机器上截图时，添加这一行代码，否则会截图失败
+        driver = new Augmenter().augment(driver);
+        File screenshotFilesrc = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotFilesrc, new File("C:\\node_screenshot.png"));
         Assert.assertTrue(driver.getPageSource().contains(searchResult));
     }
 
     @Test(dataProvider = "searchWords")
-    public void testGrid3Concurrency_3(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, MalformedURLException {
+    public void testGrid3Concurrency_3(String searchWord1, String searchWord2, String searchResult) throws InterruptedException, IOException {
         driver.get("https://www.sogou.com/");
 
         driver.findElement(By.xpath("//*[@id=\"query\"]")).sendKeys(searchWord1 + " " + searchWord2);
         driver.findElement(By.xpath("//*[@id=\"stb\"]")).click();
         Thread.sleep(2000);
+        // 只在远程 Node 机器上截图时，添加这一行代码，否则会截图失败
+        driver = new Augmenter().augment(driver);
+        File screenshotFilesrc = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotFilesrc, new File("C:\\node_screenshot.png"));
         Assert.assertTrue(driver.getPageSource().contains(searchResult));
     }
 
