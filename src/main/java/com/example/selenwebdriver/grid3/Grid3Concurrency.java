@@ -2,19 +2,22 @@ package com.example.selenwebdriver.grid3;
 
 import com.epam.jdi.light.logger.AllureLogger;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Grid3Concurrency {
     WebDriver driver;
@@ -32,25 +35,11 @@ public class Grid3Concurrency {
     @BeforeClass
     public void setUp_RemoteDriver(String browser, String Url_Node) throws MalformedURLException {
         if (browser.equalsIgnoreCase("firefox")) {
-            // 访问 远程 Node 机器上的 操作系统 和 浏览器，需要设定 DesiredCapabilities 对象的属性
-            //  DesiredCapabilities.firefox 设定 远程方法 要使用 firefox 浏览器
-            DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
-            // 设定 远程 Node 使用的浏览器为 firefox
-            desiredCapabilities.setBrowserName(browser);
-            // 设定 远程 Node 使用的操作系统为 LINUX
-            desiredCapabilities.setPlatform(Platform.ANY);
-            // 定义一个 RemoteWebDriver 对象，链接地址 使用 Url_Node1 变量，环境参数 使用 disiredCapabilityes 变量，并返回
-            driver = new RemoteWebDriver(new URL(Url_Node), desiredCapabilities);
+            driver = NodeComputer.getFirefoxRemoteDriver(browser, Url_Node);
         } else if (browser.equalsIgnoreCase("chrome")) {
-            DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-            desiredCapabilities.setBrowserName(browser);
-            desiredCapabilities.setPlatform(Platform.WINDOWS);
-            driver = new RemoteWebDriver(new URL(Url_Node), desiredCapabilities);
+            driver = NodeComputer.getChromeRemoteDriver(browser, Url_Node);
         } else if (browser.equalsIgnoreCase("internet explorer")) {
-            DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
-            desiredCapabilities.setBrowserName(browser);
-            desiredCapabilities.setPlatform(Platform.WINDOWS);
-            driver = new RemoteWebDriver(new URL(Url_Node), desiredCapabilities);
+            driver = NodeComputer.getIERemoteDriver(browser, Url_Node);
         }
     }
 
