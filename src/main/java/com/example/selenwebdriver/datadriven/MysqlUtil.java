@@ -1,6 +1,7 @@
 package com.example.selenwebdriver.datadriven;
 
-import org.junit.Assert;
+
+import org.testng.Assert;
 
 import java.sql.*;
 import java.util.ArrayList;

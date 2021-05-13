@@ -1,33 +1,20 @@
 package com.example.selenwebdriver;
 
-import com.codeborne.selenide.Browser;
-import com.codeborne.selenide.Browsers;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.epam.jdi.light.elements.common.Mouse;
-import com.sun.java.swing.plaf.windows.WindowsGraphicsUtils;
-import com.sun.javafx.logging.JFRInputEvent;
 import io.qameta.allure.selenide.AllureSelenide;
-import javafx.scene.input.MouseButton;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.xpath.operations.Div;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Encodable;
-import org.openqa.selenium.interactions.Interactive;
-import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -35,22 +22,33 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.SimpleFormatter;
 
 /**
  * 代码解释：
  *   举例演示 WebDriver 常用 API 的使用方法
+ *
+ *   另外，
+ *   Web 测试项目经常包含浏览器兼容性相关测试，工作重复性相当高，
+ *   需要经常考虑如何一次线执行多个浏览器的兼容性测试用例
+ *
+ * 测试用例说明：
+ *   分别使用 Firefox、Chrome 浏览器，TestNG 以并发方式在搜狗首页中搜索某个关键字
+ *
+ * 运行方法：
+ *   右键单击当前工程中的"testng_for_selenwebdriver-WebDriverApiExamples.xml"，选择 Run As TestNG Suite
+ *
+ * 运行效果：
+ *   在运行过程中，可以看到桌面同时弹出 Firefox、Chrome 浏览器窗口口，
+ *   并在窗口中运行测试脚本定义的操作步骤
  */
 public class WebDriverApiExamples {
     WebDriver driver;
@@ -88,14 +86,20 @@ public class WebDriverApiExamples {
         }
     }
 
-    /* 1: 访问某网页地址 */
+    /* 1: 访问某网站网页
+    *
+    * */
     @Parameters("baseUrl1")
     @Test
-    public void visitBaseUrl(String baseUrl1) {
-        // 方法一
-//        driver.get(baseUrl1 + "/");
-        // 方法二
-        driver.navigate().to(baseUrl1 + "/");
+    public void visitBaseUrl(String baseUrl1) throws InterruptedException {
+        // 打开 ”搜狗搜索“ 首页
+        driver.get(baseUrl1 + "/");
+
+        // 停顿 2 秒，让页面完成显示过程，查看操作后的结果
+        Thread.sleep(2000);
+
+        // 判断搜索结果中，是否包含期望的关键字
+        Assert.assertTrue(driver.getPageSource().contains("搜狗"));
     }
 
     /* 2: 返回访问上一个网页，又前进到下一个网页,并刷新当前页面（模拟单击浏览器的 后退、前进、重新加载 功能）
@@ -173,7 +177,7 @@ public class WebDriverApiExamples {
     /* 5: 清除输入框中原有的内容，重新输入指定的内容 */
     @Parameters("baseUrl1")
     @Test
-    public void operateInputBoxText(String baseUrl1) {
+    public void operateInputBoxText(String baseUrl1) throws InterruptedException {
         driver.get(baseUrl1 + "/");
         WebElement inputBox = driver.findElement(By.xpath("//*[@id=\"query\"]"));
         // 清除输入框中原有的内容
@@ -182,12 +186,8 @@ public class WebDriverApiExamples {
         String inputString = "指定的";
         inputBox.sendKeys(inputString, Keys.ENTER);
 
-        // 代码段可选，主要用于等待 2 秒，让页面完成显示过程，查看操作后的结果
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // 停顿 2 秒，让页面完成显示过程，查看操作后的结果
+        Thread.sleep(2000);
     }
 
     /* 6.1: 发送键盘组合键，模拟"全选 Ctrl+A ->复制 Ctrl+C ->粘贴 Ctrl+V"快捷键功能

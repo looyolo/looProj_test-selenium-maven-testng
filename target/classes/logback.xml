@@ -7,9 +7,9 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
     <!--
     定义日志输出目录:
-    首先 查找系统属性 -Dlog.dir ，若存着则使用它，否则，在当前目录下创建名为 logs 的目录
+    首先 查找系统属性 -Dlog.dir ，若存着则使用它，否则，在当前目录下创建名为 appLogs 的目录
     -->
-    <property name="LOG_HOME" value="${log.dir:-logs}/${appName}" />
+    <property name="LOG_HOME" value="${log.dir:-appLogs}/${appName}" />
     <!-- 定义日志文件名称 -->
     <property name="appName" value="logtest"></property>
     <!--

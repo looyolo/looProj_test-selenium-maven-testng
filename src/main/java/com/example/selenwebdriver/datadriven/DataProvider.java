@@ -24,7 +24,7 @@ public class DataProvider {
         Logger logger = LoggerFactory.getLogger(AllureLogger.class);
         logger.debug("allure");
         Logger loggerForDataProvider = LoggerFactory.getLogger(DataProvider.class);
-        loggerForDataProvider.debug("DataProvider");
+        loggerForDataProvider.debug("Login");
     }
 
     @Parameters({"browser", "whichDriver" , "whereDriver"})
@@ -75,8 +75,8 @@ public class DataProvider {
     *
     * 代码解释：
     *     测试脚本会自动依次打开三次浏览器，分别输入三组不同的关键词进行搜索，并且三次搜索结果均可断言成功。
-    *     其中，使用 @DataProvider 注解将当前方法中的返回对象作为测试脚本的 测试数据集，取名为"searchWords"。
-    *         取名可以在 2 个地方，在 @org.testng.annotations.DataProvider(name = "searchWords") 或 当前方法名。
+    *     其中，使用 @Login 注解将当前方法中的返回对象作为测试脚本的 测试数据集，取名为"searchWords"。
+    *         取名可以在 2 个地方，在 @org.testng.annotations.Login(name = "searchWords") 或 当前方法名。
     *             至少得有一个地方的 取名 和 @Test(dataProvider = "searchWords") 中的保持一致，才可以读取到测试数据集。
     *
     *  */
