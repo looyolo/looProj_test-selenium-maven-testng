@@ -4,9 +4,9 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.testng.annotations.*;
-
-import static org.testng.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class MainPageTest {
+public class TC_MainPage {
     private final MainPage mainPage = new MainPage();
 
     @BeforeClass
@@ -22,7 +22,7 @@ public class MainPageTest {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         Configuration.startMaximized = true;
         open("https://www.jetbrains.com/");
@@ -51,6 +51,7 @@ public class MainPageTest {
 
         $(byClassName("products-list")).shouldBe(visible);
 
-        assertEquals(Selenide.title(), "All Developer Tools and Products by JetBrains");
+        // JUnit 形参 1 是 expected ，比较符合人脑思维习惯，而 TestNG 形参 1 反而是 actual
+        Assert.assertEquals("All Developer Tools and Products by JetBrains", Selenide.title());
     }
 }

@@ -14,7 +14,7 @@
 
         <classes>
         <!-- 添加测试类，可以是多个 -->
-            <class name="com.example.selenwebdriver.grid3.Grid3Concurrency"/>
+            <class name="com.example.selenwebservergrid.Grid3Concurrency"/>
         </classes>
     </test>
     <test name="ChromeTest">
@@ -28,7 +28,7 @@
 
         <classes>
             <!-- 添加测试类，可以是多个 -->
-            <class name="com.example.selenwebdriver.grid3.Grid3Concurrency"/>
+            <class name="com.example.selenwebservergrid.Grid3Concurrency"/>
         </classes>
     </test>
 </suite>

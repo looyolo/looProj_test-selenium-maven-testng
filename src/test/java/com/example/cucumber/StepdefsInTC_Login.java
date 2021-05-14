@@ -3,7 +3,15 @@ package com.example.cucumber;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+/*
+ * 代码解释：
+ *     Cucumber 使用 Junit @RunWith(Parameterized.class) 来 参数化测试
+ *
+ *  */
+@RunWith(Parameterized.class)
 public class StepdefsInTC_Login {
     @Given("Alice is hungry")
     public Boolean aliceIsHungry() {

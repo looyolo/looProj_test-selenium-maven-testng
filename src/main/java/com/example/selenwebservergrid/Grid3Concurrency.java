@@ -1,4 +1,4 @@
-package com.example.selenwebdriver.grid3;
+package com.example.selenwebservergrid;
 
 import com.epam.jdi.light.logger.AllureLogger;
 import org.apache.commons.io.FileUtils;

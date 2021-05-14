@@ -1,4 +1,4 @@
-package com.example.selenwebdriver.grid3;
+package com.example.selenwebservergrid;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
