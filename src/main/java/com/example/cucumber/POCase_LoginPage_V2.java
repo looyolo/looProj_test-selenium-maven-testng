@@ -1,15 +1,53 @@
-package com.example.selenwebdriver.pageobject;
+package com.example.cucumber;
 
 import com.epam.jdi.light.logger.AllureLogger;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.*;
 
-public class POCase_LoginPage {
-    WebDriver driver;
+import java.util.Arrays;
+import java.util.Collection;
+
+/*
+ * 这是对 package com.example.selenwebdriver.pageobject.POCase_LoginPage 代码重构后得到的，重构时间 2021-05-14 17:30
+ *
+ * 使用目的：
+ *     用于演示 "BDD + POM " ( 行为驱动测试 + Page Object 面向对象编程模式）高级 自动化测试框架
+ *
+ * 代码解释：
+ *     自动化测试执行和管理模块 使用的是 JUnit ，而不是 TestNG
+ *
+ *  */
+@RunWith(Parameterized.class)
+public class POCase_LoginPage_V2 {
+    // 打开一个 BDD 专用浏览器
+    public static WebDriver driver = new BDD("chrome").getDriver();
+
+    String userName = "";
+    String password = "";
+    String tips = "";
+
+    public POCase_LoginPage_V2(String userName, String password, String tips) {
+        this.userName = userName;
+        this.password = password;
+        this.tips = tips;
+    }
+
+    // 参数化
+    @Parameterized.Parameters
+    public static Collection<Object[]> preparedData() {
+        Object[][] data = {
+                {"x_man_no0", "TEST2021", "帐号或密码错误"},  // 注意：是"帐篷"的"帐"
+                {"x_man_no1", "TEST2021", "收件箱"}
+        };
+
+        return Arrays.asList(data);
+    }
 
     @BeforeClass
     public static void setUpAllure() {
@@ -18,43 +56,18 @@ public class POCase_LoginPage {
         // LoggerFactory 类提供的 Logger 接口，来自 org.slf4j:slf4j-api:1.7.30
         Logger logger = LoggerFactory.getLogger(AllureLogger.class);
         logger.debug("allure");
-        Logger loggerForDataProvider = LoggerFactory.getLogger(POCase_LoginPage.class);
-        loggerForDataProvider.debug("POCase_LoginPage");
-    }
-
-    @Parameters({"browser", "whichDriver" , "whereDriver"})
-    @BeforeClass
-    public void setUp(String browser, String whichDriver , String whereDriver) {
-        if (browser.equalsIgnoreCase("firefox")) {
-            // 指定 浏览器驱动程序 的 存放路径，并添加到系统属性中
-            System.setProperty(whichDriver, whereDriver);
-            driver = new FirefoxDriver();
-            // 打开浏览器，使用"无头模式"，不会在桌面上打开，只在内存上运行
-//            driver = new FirefoxDriver(new FirefoxOptions().addArguments("-headless"));
-        }
-        if (browser.equalsIgnoreCase("chrome")) {
-            System.setProperty(whichDriver, whereDriver);
-            driver = new ChromeDriver();
-//            driver = new ChromeDriver(new ChromeOptions().addArguments("-headless"));
-        }
+        Logger loggerForDataProvider = LoggerFactory.getLogger(POCase_LoginPage_V2.class);
+        loggerForDataProvider.debug("POCase_LoginPage_V2");
     }
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
         try {
             // Nothing to do
         } finally {
             // 关闭浏览器
             driver.quit();
         }
-    }
-
-    @DataProvider
-    public static Object[][] userInfo() {
-        return new Object[][]{
-                {"x_man_no0", "TEST2021", "帐号或密码错误"},  // 注意：是"帐篷"的"帐"
-                {"x_man_no1", "TEST2021", "收件箱"}
-        };
     }
 
     /*
@@ -67,10 +80,10 @@ public class POCase_LoginPage {
      *     （6）退出登录窗口，返回到默认页面
      *
      *  */
-    @Test(dataProvider = "userInfo")
-    public void testLogin(String userName, String password, String tips) throws InterruptedException {
+    @Test
+    public void testLogin() throws InterruptedException {
         // 定义一个 LoginPage 对象实例
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage_Copy_1 loginPage = new LoginPage_Copy_1(driver);
         //  准备好的 测试数据(用户名、密码、提示词)，进行 数据驱动测试
         loginPage.preparedUserInfo(userName, password, tips);
         // 调用 登录页面对象的 load 方法 去访问被测试网址

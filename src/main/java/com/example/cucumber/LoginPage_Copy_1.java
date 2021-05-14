@@ -1,24 +1,34 @@
-package com.example.selenwebdriver.pageobject;
+package com.example.cucumber;
 
+import com.example.selenwebdriver.pageobject.HomePage;
+import org.junit.Assert;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.testng.Assert;
 
 /*
-* 代码解释：
-*     在 LoginPage 页面对象中，不仅从测试脚本中分离出 页面元素的定位表达式（使用 @FindBy 注解），
-*     还封装了 页面元素的操作方法，使得在测试脚本中实现测试逻辑更加清晰容易。
-*     这些封装好的 页面元素的操作方法 还可以被很多测试逻辑重复调用，从而调高了脚本编写和维护的效率。
-*     如果将来测试过程中的元素定位发生了变化，或者页面的某个操作过程发生了变化，
-*     仅仅修改封装好的测试方法即可实现维护。
-*     另外，通过 继承 LoadableComponent 类，测试程序 可以判断 浏览器 是否加载了正确的网址页面，
-*     只需要重写 isLoaded() 和 Load() 两个方法。这个方式 有助于 使页面对象的页面访问操作更加稳定。
-*
-*  */
-public class LoginPage extends LoadableComponent<LoginPage> {
+ * 这是 package com.example.selenwebdriver.pageobject.LoginPage 的一个副本。复制于 2021-05-14 16:41
+ *
+ * 使用目的：
+ *     用于演示 "BDD + POM " ( 行为驱动测试 + Page Object 面向对象编程模式）高级 自动化测试框架
+ *
+ * 代码解释：
+ *     在 LoginPage 页面对象中，不仅从测试脚本中分离出 页面元素的定位表达式（使用 @FindBy 注解），
+ *     还封装了 页面元素的操作方法，使得在测试脚本中实现测试逻辑更加清晰容易。
+ *     这些封装好的 页面元素的操作方法 还可以被很多测试逻辑重复调用，从而调高了脚本编写和维护的效率。
+ *     如果将来测试过程中的元素定位发生了变化，或者页面的某个操作过程发生了变化，
+ *     仅仅修改封装好的测试方法即可实现维护。
+ *     另外，通过 继承 LoadableComponent 类，测试程序 可以判断 浏览器 是否加载了正确的网址页面，
+ *     只需要重写 isLoaded() 和 Load() 两个方法。这个方式 有助于 使页面对象的页面访问操作更加稳定。
+ *
+ *     自动化测试执行和管理模块 使用的是 JUnit ，而不是 TestNG
+ *
+ *  */
+public class LoginPage_Copy_1 extends LoadableComponent<com.example.selenwebdriver.pageobject.LoginPage> {
     WebDriver driver;
     String url = "https://mail.126.com/";
     String title = "126网易免费邮--你的专业电子邮";
@@ -36,7 +46,7 @@ public class LoginPage extends LoadableComponent<LoginPage> {
     @FindBy(xpath = "//*[@id=\"dologin\"]")
     WebElement loginButton;
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage_Copy_1(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver,this);
     }

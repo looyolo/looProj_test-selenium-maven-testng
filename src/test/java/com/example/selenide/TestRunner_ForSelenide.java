@@ -1,6 +1,6 @@
 package com.example.selenide;
 
-public class TestRunnerForSelenide {
+public class TestRunner_ForSelenide {
     public static void main(String[] args) {
     }
 }

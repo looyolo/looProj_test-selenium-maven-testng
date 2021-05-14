@@ -22,5 +22,5 @@ import org.junit.runner.RunWith;
         tags = "@simpleDemo",
         glue = {"com.example.cucumber"},
         plugin = {"pretty","html:cucumber-result/cucumber.html","json:cucumber-result/cucumber.json"})
-public class TestRunnerForCucumber {
+public class TestRunner_ForCucumber {
 }

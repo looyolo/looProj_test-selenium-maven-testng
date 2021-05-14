@@ -1,0 +1,84 @@
+[
+  {
+    "line": 3,
+    "elements": [
+      {
+        "start_timestamp": "2021-05-14T16:28:51.480Z",
+        "line": 5,
+        "name": "登录 126邮箱 成功",
+        "description": "",
+        "id": "登录-126邮箱;登录-126邮箱-成功",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 10714000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "用户浏览 126邮箱 登录页面，网址为 “http://www.126.com”",
+            "match": {
+              "arguments": [
+                {
+                  "val": "126",
+                  "offset": 5
+                },
+                {
+                  "val": "http://www.126.com",
+                  "offset": 21
+                }
+              ],
+              "location": "com.example.cucumber.StepDefs_ForCase_Login_ByChinese.用户浏览邮箱登录页面网址为(int,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 6982000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "用户输入 用户名、密码后，点击登录",
+            "match": {
+              "location": "com.example.cucumber.StepDefs_ForCase_Login_ByChinese.用户输入用户名密码后点击登录()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1104000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "页面会跳转显示 ”收件箱“ 文案",
+            "match": {
+              "location": "com.example.cucumber.StepDefs_ForCase_Login_ByChinese.页面会跳转显示收件箱文案()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@simpleDemo"
+          }
+        ]
+      }
+    ],
+    "name": "登录 126邮箱",
+    "description": "",
+    "id": "登录-126邮箱",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/Feature/Case_Login_ByChinaese.feature",
+    "tags": [
+      {
+        "name": "@simpleDemo",
+        "type": "Tag",
+        "location": {
+          "line": 2,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
